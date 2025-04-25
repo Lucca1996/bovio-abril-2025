@@ -1,20 +1,24 @@
 import React from "react";
-import { ChooseCategory } from './components/choose-category';
-
-import { BannerOne } from "./components/banner-one";
-import { BannerTwo } from "./components/banner-two";
-import { CarouselMain } from "./components/carousel-main";
-import { BannerThree } from "./components/banner-three";
-import { Equipamento } from "./components/equipamento";
-import { FeaturedProducts } from "./components/featured-products";
+import { HeroSection } from './components/hero-section';
 import { getCategories } from "./components/getCategories";
 import { getProducts } from "./components/getProducts";
 import { getUser } from "./(authenticated)/actions/getUser";
+import { Metadata } from "next";
+import { CallToAction } from './components/call-to-action';
+import { NewsCarousel } from "./components/news-carousel";
+import { FeatureGrid } from "./components/feature-grid";
+import { BannerThree } from "./components/banner-three";
+import { Equipamento } from "./components/equipamento";
 
+// Metadatos para SEO
+export const metadata: Metadata = {
+  title: 'Bovio SAS - Carpintería de Calidad',
+  description: 'Soluciones de carpintería personalizadas para hogares y empresas. Diseño, calidad y servicio excepcional.',
+}
 
-export default async function page(){
-  const categories = await getCategories(); // Obtiene las categorías
-  const products = await getProducts(); // Obtiene las categorías
+export default async function HomePage() {
+  const categories = await getCategories();
+  const products = await getProducts();
   const user = await getUser();
   
   const favoriteIds = user?.favorites?.map(fav => 
@@ -24,13 +28,16 @@ export default async function page(){
     typeof car === 'number' ? car : car.id
   ) || [];
 
-  return <main>
-        <BannerOne />
-        <CarouselMain />
-        <BannerTwo />
-        <FeaturedProducts products={products} initialFavorites={favoriteIds} initialCart={cartIds} />
+  return <main className="min-h-screen overflow-x-hidden">
+ 
+      <HeroSection />
+      
+      {/* Grid de características con flip-cards */}
+      <FeatureGrid categories={categories} />
+        <NewsCarousel products={products} initialFavorites={favoriteIds} initialCart={cartIds} />
         <BannerThree />
-        <ChooseCategory categories={categories} />
         <Equipamento />
+        {/* Llamado a acción con animación de morphing */}
+        <CallToAction />
   </main>
 }
