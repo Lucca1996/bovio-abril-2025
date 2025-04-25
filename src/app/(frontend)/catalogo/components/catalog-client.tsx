@@ -1,8 +1,5 @@
 'use client'
 
-import { SkeletonSchema } from '../../components/skeletonSchema'
-// Eliminar o renombrar la importación no utilizada
-// import { ProductType } from '../../types/product'
 import type { Product, Category, Style } from '@/payload-types'
 import { ProductCard } from '../../components/shared/product-card'
 import { useState, useEffect } from 'react'
@@ -89,8 +86,9 @@ const CatalogClient: React.FC<CatalogClientProps> = ({
     if (styleId !== null) params.set('style', styleId.toString())
     router.push(`/catalogo?${params.toString()}`)
   }
+  
   return (
-    <>
+    <div className="space-y-8">
       <FiltersControlCategory
         categories={categories}
         styles={styles}
@@ -99,24 +97,49 @@ const CatalogClient: React.FC<CatalogClientProps> = ({
         selectedCategory={searchParams.get('category')}
         selectedStyle={searchParams.get('style')}
       />
-      <div className="grid gap-5 mt-8 sm:grid-cols-2 md:grid-cols-3 md:gap-10">
+      
+      {/* Resultados de productos */}
+      <section aria-label="Productos" className="min-h-[300px]">
         {isLoading ? (
-          <SkeletonSchema grid={3} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 animate-pulse">
+                <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded-md mb-4"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded-md w-3/4 mb-2"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded-md w-1/2"></div>
+              </div>
+            ))}
+          </div>
         ) : products.length === 0 ? (
-          <p>No hay productos disponibles.</p>
+          <div className="text-center py-12 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+            <p className="text-gray-600 dark:text-gray-300 text-lg">No hay productos disponibles con los filtros seleccionados.</p>
+            <button 
+              onClick={() => {
+                router.push('/catalogo')
+              }}
+              className="mt-4 text-primary hover:text-primary-dark transition-colors"
+            >
+              Ver todos los productos
+            </button>
+          </div>
         ) : (
-          products.map((product) => (
-            <div className="p-1 md:basis-1/2 lg:basis-1/3 group" key={product.id}>
-              <ProductCard
-                {...mapPayloadProductToProductType(product)}
-                initialIsFavorite={initialFavorites.includes(product.id)}
-                initialIsCart={initialCart.includes(product.id)}
-              />
-            </div>
-          ))
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+            {products.map((product) => (
+              <article 
+                key={product.id} 
+                className="group h-full transition-all duration-300 hover:z-10"
+              >
+                <ProductCard
+                  {...mapPayloadProductToProductType(product)}
+                  initialIsFavorite={initialFavorites.includes(product.id)}
+                  initialIsCart={initialCart.includes(product.id)}
+                />
+              </article>
+            ))}
+          </div>
         )}
-      </div>
-    </>
+      </section>
+    </div>
   )
 }
 
