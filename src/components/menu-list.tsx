@@ -116,10 +116,10 @@ export function MenuList() {
                                     </Link>
                                 </NavigationMenuLink>
                             </li>
-                            <ListItem key="trabajos" href="/mantenimiento" title="Trabajos">
+                            <ListItem key="trabajos" href="/jobs" title="Trabajos">
                                 Aquí se pueden apreciar referencias reales de nuestros trabajos realizados.
                             </ListItem>
-                            <ListItem key="clientes" href="/mantenimiento" title="Nuestros clientes">
+                            <ListItem key="clientes" href="/ourclients" title="Nuestros clientes">
                                 Forma parte de nuestra familia con clientes como:
                             </ListItem>
                             <ListItem key="presupuestos" href="/mantenimiento" title="Presupuestos">
