@@ -93,7 +93,7 @@ export const HeroSection = () => {
           style={{ y: textY, opacity: fadeIn }}
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 leading-tight">
             Transformamos <span className="text-primary">madera</span> en experiencias únicas
@@ -171,7 +171,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
             >
               <div className="relative w-full h-full">
                 <Image
@@ -192,7 +192,7 @@ export const HeroSection = () => {
                   <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.5 }}
+                    transition={{ delay: 0.1, duration: 0.3 }}
                     className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2"
                   >
                     {carouselData[currentSlide].slogan}
@@ -201,7 +201,7 @@ export const HeroSection = () => {
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.5 }}
+                    transition={{ delay: 0.2, duration: 0.3 }}
                     className="text-sm sm:text-base md:text-lg text-gray-200 mb-2 sm:mb-3 md:mb-4 line-clamp-2 sm:line-clamp-none"
                   >
                     {carouselData[currentSlide].description}
@@ -210,7 +210,7 @@ export const HeroSection = () => {
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, duration: 0.5 }}
+                    transition={{ delay: 0.3, duration: 0.3 }}
                     className="bg-primary/80 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg inline-block"
                   >
                     <span className="font-medium text-sm sm:text-base">
@@ -229,7 +229,7 @@ export const HeroSection = () => {
         className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
         style={{ opacity: fadeIn }}
       >
         <span className="text-xs sm:text-sm text-white mb-1 sm:mb-2">Descubre más</span>
@@ -242,7 +242,7 @@ export const HeroSection = () => {
             }}
             transition={{ 
               repeat: Infinity, 
-              duration: 1.5,
+              duration: 1,
               ease: "easeInOut" 
             }}
           />
