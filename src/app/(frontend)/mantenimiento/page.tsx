@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { WhatsAppButton } from "../components/whatsapp-button"
 
 export default function MaintenancePage() {
     return (
@@ -77,8 +78,12 @@ export default function MaintenancePage() {
                             Teléfono: +123 456 789
                         </p>
                     </div>
+                    
+                    <div className="mt-6">
+                        <WhatsAppButton text="Contáctanos por WhatsApp" className="w-full justify-center" />
+                    </div>
                 </div>
             </motion.div>
         </div>
     )
-} 
+}

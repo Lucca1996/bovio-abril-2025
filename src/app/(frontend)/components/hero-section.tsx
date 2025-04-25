@@ -83,7 +83,7 @@ export const HeroSection = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative w-full h-[100vh] md:h-[95vh] lg:h-[95vh] overflow-hidden bg-gradient-to-t from-black/70 via-black/40 to-transparent"
+      className="relative w-full h-[95vh] md:h-[94vh] lg:h-[94vh] overflow-hidden bg-gradient-to-t from-black/70 via-black/40 to-transparent"
       aria-label="Sección principal"
     >
       <div className="container relative z-10 mx-auto h-full flex flex-col lg:flex-row items-center justify-center lg:justify-between px-4 sm:px-6 py-4 md:py-6 lg:py-8">

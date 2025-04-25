@@ -4,6 +4,7 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
+import { WhatsAppChat } from "./whatsapp-chat"
 
 interface ClientLayoutProps {
     children: React.ReactNode
@@ -21,17 +22,26 @@ export const ClientLayout = ({ children }: ClientLayoutProps) => {
     }, [pathname, isExiting])
 
     return (
-        <AnimatePresence mode="wait" onExitComplete={() => setIsExiting(false)}>
-            <motion.div
-                key={currentPath}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6 }} // Duración de la animación
-                onAnimationStart={() => setIsExiting(true)} // Inicia el fade out
-            >
-                {children}
-            </motion.div>
-        </AnimatePresence>
+        <main className="flex-grow pt-16">
+            <AnimatePresence mode="wait" onExitComplete={() => setIsExiting(false)}>
+                <motion.div
+                    key={currentPath}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ 
+                        duration: 0.4,
+                        ease: "easeInOut"
+                    }}
+                    className="min-h-[calc(100vh-4rem)]"
+                    onAnimationStart={() => setIsExiting(true)}
+                >
+                    {children}
+                </motion.div>
+            </AnimatePresence>
+            
+            {/* Botón flotante de WhatsApp con diálogo */}
+            <WhatsAppChat floating={true} />
+        </main>
     )
 }
