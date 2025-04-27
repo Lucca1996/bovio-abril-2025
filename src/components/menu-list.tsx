@@ -122,7 +122,7 @@ export function MenuList() {
                             <ListItem key="clientes" href="/ourclients" title="Nuestros clientes">
                                 Forma parte de nuestra familia con clientes como:
                             </ListItem>
-                            <ListItem key="presupuestos" href="/mantenimiento" title="Presupuestos">
+                            <ListItem key="presupuestos" href="/presupuestos" title="Presupuestos">
                                 Pide tu presupuesto y/o asesoramiento aquí.
                             </ListItem>
                         </ul>

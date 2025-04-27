@@ -43,7 +43,7 @@ export const ItemsMenuMobile = () => {
             submenu: [
                 { href: "/jobs", label: "Trabajos" },
                 { href: "/ourclients", label: "Nuestros clientes" },
-                { href: "/mantenimiento", label: "Presupuestos" }
+                { href: "/presupuestos", label: "Presupuestos" }
             ]
         },
         { 
