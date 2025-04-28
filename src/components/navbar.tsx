@@ -12,6 +12,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useCartStore } from "@/store/useCartStore";
 import { navigationMenuTriggerStyle } from "./ui/navigation-menu";
 import Link from "next/link";
+import { Logo } from './logo';
 
 export const NAVBAR_HEIGHT = "4rem"; // 64px
 
@@ -66,11 +67,13 @@ export const Navbar = ({ user }: { user: Customer | null }) => {
                     {/* Logo con animación de escala */}
                     <Link 
                         href="/"
-                        className="text-2xl sm:text-3xl  transition-all duration-300 hover:scale-105 focus:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
+                        className="flex items-center transition-all duration-300 hover:scale-105 focus:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
                         aria-label="Bovio SAS - Página de inicio"
                     >
-                        Bovio
-                        <span className="font-bold">SAS</span>
+                        <Logo />
+                        <span className="text-xl sm:text-xl">
+                            Bovio<span className="font-bold">SAS</span>
+                        </span>
                     </Link>
 
                     {/* Menú de navegación desktop */}

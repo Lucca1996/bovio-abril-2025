@@ -16,6 +16,8 @@ import { toast } from 'sonner';
 import { getUser } from '../../(authenticated)/actions/getUser';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useCartStore } from '@/store/useCartStore'; // Importar el store global
+import { useFavoriteStore } from '@/store/useFavoriteStore'; // Importar el store de favoritos si existe
 
 export const dynamic = 'force-dynamic';
 
@@ -28,6 +30,10 @@ export default function ProductPage() {
     const [isCart, setIsCart] = useState(false);
     const [scrollProgress, setScrollProgress] = useState(0);
     const mainRef = useRef<HTMLElement>(null);
+    
+    // Usar los stores globales
+    const { updateCartCount } = useCartStore();
+    const { updateFavoritesCount } = useFavoriteStore();
 
     // Efecto combinado para cargar producto y datos de usuario
     useEffect(() => {
@@ -91,6 +97,8 @@ export default function ProductPage() {
         try {
             await toggleFavorite(product.id);
             setIsFavorite(!isFavorite);
+            // Actualizar el contador global de favoritos
+            updateFavoritesCount(!isFavorite);
             toast.success(isFavorite ? 'Producto eliminado de favoritos' : 'Producto agregado a favoritos');
         } catch (_error) {
             toast.error('Error al actualizar favoritos');
@@ -102,6 +110,8 @@ export default function ProductPage() {
         try {
             await toggleCart(product.id);
             setIsCart(!isCart);
+            // Actualizar el contador global del carrito
+            updateCartCount(!isCart);
             toast.success(isCart ? 'Producto eliminado del carrito' : 'Producto agregado al carrito');
         } catch (_error) {
             toast.error('Error al actualizar el carrito');

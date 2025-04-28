@@ -11,6 +11,6 @@ export const useFavoriteStore = create<FavoriteStore>((set) => ({
   setFavoritesCount: (count) => set({ favoritesCount: count }),
   updateFavoritesCount: (increment) => 
     set((state) => ({ 
-      favoritesCount: increment ? state.favoritesCount + 1 : state.favoritesCount - 1 
+      favoritesCount: increment ? state.favoritesCount + 1 : Math.max(0, state.favoritesCount - 1) 
     })),
-})); 
+}));

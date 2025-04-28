@@ -9,9 +9,18 @@ import { ClientLayout } from './components/client-layout' // Import ClientLayout
 import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata = {
-  title: 'SAS - Sistema de Administración de Servicios',
-  description: 'Sistema de Administración de Servicios',
-}
+    title: 'SAS - Sistema de Administración de Servicios',
+    description: 'Sistema de Administración de Servicios',
+    icons: {
+      icon: [
+        { url: '/favicon.ico', sizes: '32x32' },
+        { url: '/favicon-16x16.png', sizes: '16x16' },
+        { url: '/favicon-32x32.png', sizes: '32x32' },
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+      ],
+      apple: { url: '/apple-touch-icon.png', sizes: '180x180' },
+    },
+  }
 
 export const dynamic = 'force-dynamic';
 
