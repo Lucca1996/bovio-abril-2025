@@ -10,6 +10,11 @@ export default async function page() {
         typeof fav !== 'number' && fav !== null
     );
 
+    // Obtener los IDs de productos en el carrito
+    const cartIds = user?.cart?.map(item => 
+        typeof item === 'number' ? item : item.id
+    ) || [];
+
     return (
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="text-center my-10">
@@ -21,7 +26,7 @@ export default async function page() {
                 </p>
             </div>
 
-            <FavoritesClient initialFavorites={favoriteProducts} />
+            <FavoritesClient initialFavorites={favoriteProducts} cartIds={cartIds} />
         </main>
     );
 }

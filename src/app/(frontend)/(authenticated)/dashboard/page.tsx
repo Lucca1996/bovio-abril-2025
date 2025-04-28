@@ -18,6 +18,22 @@ export default async function page() {
     const payloadConfig = await config
     const payload = await getPayload({ config: payloadConfig })
     const { user } = await payload.auth({ headers })
+    
+    // Obtener la imagen de perfil del usuario si existe
+    let profileImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI4yKnjT4EmZwDGMxrPtjt4xJChaDC79N-AzzfU0uKs8LHI43gM3imE2MA5M6WzttveH8&usqp=CAU"
+    
+    // Usar verificación segura de tipo con operador opcional y aserción de tipo
+    if (user && 'perfil' in user && typeof user.perfil === 'string') {
+        profileImage = user.perfil
+    }
+    
+    // Obtener el nombre del usuario si existe
+    let userName = user?.email?.split('@')[0] || 'Usuario';
+    
+    // Verificar si el usuario tiene un nombre personalizado
+    if (user && 'nombre' in user && typeof user.nombre === 'string') {
+        userName = user.nombre
+    }
 
     return (
         <div>
@@ -39,8 +55,8 @@ export default async function page() {
                                 <div className="flex flex-col items-center space-y-4 mb-6">
                                     <div className="h-24 w-24 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden border-4 border-primary/20">
                                         <Image 
-                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI4yKnjT4EmZwDGMxrPtjt4xJChaDC79N-AzzfU0uKs8LHI43gM3imE2MA5M6WzttveH8&usqp=CAU" 
-                                            alt="imagen generica de usuario" 
+                                            src={profileImage} 
+                                            alt="imagen de perfil del usuario" 
                                             width={96}
                                             height={96}
                                             className="rounded-full"
@@ -48,7 +64,7 @@ export default async function page() {
                                     </div>
                                     <div className="text-center">
                                         <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                                            {user?.email?.split('@')[0]}
+                                            {userName}
                                         </h2>
                                         <p className="text-gray-500 dark:text-gray-400 text-sm">
                                             {user?.email}
@@ -102,7 +118,7 @@ export default async function page() {
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                 <div>
                                                     <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Nombre</h3>
-                                                    <p className="mt-1 text-gray-900 dark:text-white">{user?.email?.split('@')[0] || 'No especificado'}</p>
+                                                    <p className="mt-1 text-gray-900 dark:text-white">{userName || 'No especificado'}</p>
                                                 </div>
                                                 <div>
                                                     <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Email</h3>

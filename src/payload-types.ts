@@ -226,6 +226,10 @@ export interface Customer {
   id: number;
   favorites?: (number | Product)[] | null;
   cart?: (number | Product)[] | null;
+  perfil?: string | null;
+  direcciones?: string[] | null;
+  nombre?: string | null;
+  telefono?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -480,6 +484,10 @@ export interface StyleSelect<T extends boolean = true> {
 export interface CustomersSelect<T extends boolean = true> {
   favorites?: T;
   cart?: T;
+  perfil?: T;
+  direcciones?: T;
+  nombre?: T;
+  telefono?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

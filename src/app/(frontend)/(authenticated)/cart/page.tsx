@@ -4,16 +4,20 @@ import { getUser } from "../actions/getUser";
 import { CartClient } from "./components/cart-client";
 import { Product } from "@/payload-types";
 
-export default async function page() {
+export default async function CartPage() {
     const user = await getUser();
-    const products = await getProducts(); // Obtiene las categorías
+    const products = await getProducts();
+    
+    // Extraer IDs de favoritos y carrito
     const favoriteIds = user?.favorites?.map(fav => 
         typeof fav === 'number' ? fav : fav.id
-      ) || [];
-      const cartIds = user?.cart?.map(car => 
+    ) || [];
+    
+    const cartIds = user?.cart?.map(car => 
         typeof car === 'number' ? car : car.id
-      ) || [];
-    // Filtrar solo los favoritos que son objetos Product completos
+    ) || [];
+    
+    // Filtrar solo los productos completos del carrito
     const cartProducts = (user?.cart || []).filter((car): car is Product => 
         typeof car !== 'number' && car !== null
     );
@@ -29,7 +33,7 @@ export default async function page() {
                 </p>
             </div>
 
-            <CartClient initialCart={cartProducts} />
+            <CartClient initialCart={cartProducts} cartIds={cartIds} />
             <FeaturedProducts products={products} initialFavorites={favoriteIds} initialCart={cartIds} />
         </main>
     );

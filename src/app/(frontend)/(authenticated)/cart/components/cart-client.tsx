@@ -15,19 +15,21 @@ import { useCartStore } from '@/store/useCartStore'
 import { Media } from '@/types/media'
 import { getImageUrl } from '@/app/(frontend)/lib/getImageUrl'
 import Image from 'next/image'
+import { getUser } from '@/app/(frontend)/(authenticated)/actions/getUser'
 
 interface CartClientProps {
   initialCart: Product[]
+  cartIds?: number[]
 }
 
-export const CartClient: React.FC<CartClientProps> = ({ initialCart }) => {
+export const CartClient: React.FC<CartClientProps> = ({ initialCart, cartIds = [] }) => {
   const [cart, setCart] = useState<Product[]>(initialCart)
   const [quantities, setQuantities] = useState<Record<number, number>>({})
   const [coupon, setCoupon] = useState('')
   const [isValidCoupon, setIsValidCoupon] = useState(false)
   const router = useRouter()
-  const { updateCartCount } = useCartStore()
-
+  const { updateCartCount, cartCount } = useCartStore()
+ 
   useEffect(() => {
     // Inicializar cantidades
     const initialQuantities = initialCart.reduce(
@@ -39,6 +41,79 @@ export const CartClient: React.FC<CartClientProps> = ({ initialCart }) => {
     )
     setQuantities(initialQuantities)
   }, [initialCart])
+
+  // Efecto para actualizar el carrito cuando cambian los cartIds
+  useEffect(() => {
+    // Filtrar los productos del carrito basado en los cartIds actualizados
+    const updatedCart = initialCart.filter(product => cartIds.includes(product.id))
+    setCart(updatedCart)
+  }, [cartIds, initialCart])
+
+  // Efecto para actualizar el carrito cuando cambia el contador global
+  useEffect(() => {
+    const refreshCart = async () => {
+      try {
+        // Obtener los datos actualizados del usuario (incluido el carrito)
+        const userData = await getUser()
+        
+        if (userData && userData.cart) {
+          // Filtrar solo los productos completos (no IDs)
+          const cartProducts = userData.cart.filter((item): item is Product => 
+            typeof item !== 'number' && item !== null
+          )
+          
+          setCart(cartProducts)
+          
+          // Actualizar cantidades para los nuevos productos
+          const newQuantities = { ...quantities }
+          cartProducts.forEach((product) => {
+            if (!newQuantities[product.id]) {
+              newQuantities[product.id] = 1
+            }
+          })
+          setQuantities(newQuantities)
+        }
+      } catch (error) {
+        console.error('Error al actualizar el carrito:', error)
+      }
+    }
+    
+    // Refrescar el carrito cuando cambie el contador global
+    refreshCart()
+    
+    // También podemos refrescar el carrito cuando el componente se monte
+    router.refresh()
+    
+  }, [cartCount, router])
+
+  // Efecto para actualizar el carrito cuando se añade un nuevo producto
+  useEffect(() => {
+    const fetchCartProducts = async () => {
+      try {
+        const response = await fetch('/api/cart')
+        if (response.ok) {
+          const data = await response.json()
+          if (data && data.products) {
+            setCart(data.products)
+            
+            // Actualizar cantidades para los nuevos productos
+            const newQuantities = { ...quantities }
+            data.products.forEach((product: Product) => {
+              if (!newQuantities[product.id]) {
+                newQuantities[product.id] = 1
+              }
+            })
+            setQuantities(newQuantities)
+          }
+        }
+      } catch (error) {
+        console.error('Error al obtener productos del carrito:', error)
+      }
+    }
+
+    // Verificar si hay cambios en el contador del carrito
+    fetchCartProducts()
+  }, [cartCount])
 
   const handleQuantityChange = (productId: number, increment: boolean) => {
     setQuantities((prev) => ({

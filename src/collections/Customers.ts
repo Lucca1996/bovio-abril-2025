@@ -17,12 +17,36 @@ export const Customers: CollectionConfig = {
             hasMany: true,
             label: 'Favorites',
           },
-        {
+       {
             name: 'cart',
             type: 'relationship',
             relationTo: 'products',
             hasMany: true,
             label: 'Cart',
-          },
+          }, 
+          {
+            name: 'perfil',
+            type: 'text',
+            hasMany: false,
+            label: 'imagen de perfil',
+          }, 
+          {
+            name: 'direcciones',
+            type: 'text',
+            hasMany: true,
+            label: 'direcciones',
+          }, 
+          {
+            name: 'nombre',
+            type: 'text',
+            hasMany: false,
+            label: 'nombre completo',
+          }, 
+          {
+            name: 'telefono',
+            type: 'text',
+            hasMany: false,
+            label: 'telefono',
+          }, 
     ],
 }

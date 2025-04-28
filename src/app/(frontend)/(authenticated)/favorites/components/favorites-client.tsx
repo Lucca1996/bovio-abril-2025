@@ -8,9 +8,13 @@ import { Separator } from "@/components/ui/separator";
 
 interface FavoritesClientProps {
     initialFavorites: Product[];
+    cartIds?: number[];
 }
 
-export const FavoritesClient: React.FC<FavoritesClientProps> = ({ initialFavorites }) => {
+export const FavoritesClient: React.FC<FavoritesClientProps> = ({ 
+    initialFavorites,
+    cartIds = []
+}) => {
     const [favorites, setFavorites] = useState<Product[]>(initialFavorites);
 
     const handleRemoveFavorite = (productId: number) => {
@@ -30,6 +34,7 @@ export const FavoritesClient: React.FC<FavoritesClientProps> = ({ initialFavorit
                             <ProductCard 
                                 {...product as unknown as ProductType} 
                                 initialIsFavorite={true}
+                                initialIsCart={cartIds.includes(product.id)}
                                 onFavoriteRemoved={() => handleRemoveFavorite(product.id)}
                             />
                         </div>
@@ -39,4 +44,4 @@ export const FavoritesClient: React.FC<FavoritesClientProps> = ({ initialFavorit
             <Separator className="my-6" />
         </>
     );
-}; 
+};
