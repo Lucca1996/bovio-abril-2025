@@ -91,7 +91,7 @@ export default function PresupuestosPage() {
   
   // Agregar estados faltantes
   const [opcionAdicional, setOpcionAdicional] = useState<string>('ninguna');
-  const [tipoEspacio, setTipoEspacio] = useState<string>('pequeno');
+  const [tipoEspacio, _setTipoEspacio] = useState<string>('pequeno');
   const [esProyectoEmpresarial, setEsProyectoEmpresarial] = useState<boolean>(false);
   
   // Estado para el formulario detallado

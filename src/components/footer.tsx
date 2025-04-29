@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { Logo } from "./logo"
 
 export const Footer = () => {
     const pathname = usePathname()
@@ -12,10 +13,16 @@ export const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Información de la empresa */}
                     <div className="space-y-4">
-                    <h2 className="text-3xl">
-                        Bovio
-                        <span className="font-bold">SAS</span>
-                    </h2>
+                    <Link 
+                        href="/"
+                        className="flex items-center transition-all duration-300 hover:scale-105 focus:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
+                        aria-label="Bovio SAS - Página de inicio"
+                    >
+                        <Logo />
+                        <span className="text-xl sm:text-xl">
+                            Bovio<span className="font-bold">SAS</span>
+                        </span>
+                    </Link>
                         <p className="text-sm text-gray-600 dark:text-gray-400">
                             Tu destino para encontrar los mejores productos de calidad.
                         </p>

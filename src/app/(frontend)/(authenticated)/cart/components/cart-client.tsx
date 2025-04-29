@@ -84,7 +84,7 @@ export const CartClient: React.FC<CartClientProps> = ({ initialCart, cartIds = [
     // También podemos refrescar el carrito cuando el componente se monte
     router.refresh()
     
-  }, [cartCount, router])
+  }, [cartCount, router, quantities])
 
   // Efecto para actualizar el carrito cuando se añade un nuevo producto
   useEffect(() => {
@@ -113,7 +113,7 @@ export const CartClient: React.FC<CartClientProps> = ({ initialCart, cartIds = [
 
     // Verificar si hay cambios en el contador del carrito
     fetchCartProducts()
-  }, [cartCount])
+  }, [cartCount, quantities])
 
   const handleQuantityChange = (productId: number, increment: boolean) => {
     setQuantities((prev) => ({
