@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, memo, useMemo, useEffect } from "react";
-import { Slider } from "@/components/ui/slider";
+// Ya no necesitamos el componente Slider
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
@@ -19,14 +19,13 @@ interface FinishCustomizerProps {
 
 export const FinishCustomizer = memo(({ finishes, basePrice }: FinishCustomizerProps) => {
   const [selectedFinish, setSelectedFinish] = useState(0);
-  const [quantity, setQuantity] = useState(1);
   const [isPriceAnimating, setIsPriceAnimating] = useState(false);
 
   // Usamos useMemo para calcular valores derivados
   const currentFinish = useMemo(() => finishes[selectedFinish], [finishes, selectedFinish]);
-  const totalPrice = useMemo(() => 
-    basePrice * currentFinish.priceMultiplier * quantity, 
-    [basePrice, currentFinish.priceMultiplier, quantity]
+  const productPrice = useMemo(() => 
+    basePrice * currentFinish.priceMultiplier, 
+    [basePrice, currentFinish.priceMultiplier]
   );
 
   // Activar animación de pulso cuando cambia el precio
@@ -34,7 +33,7 @@ export const FinishCustomizer = memo(({ finishes, basePrice }: FinishCustomizerP
     setIsPriceAnimating(true);
     const timer = setTimeout(() => setIsPriceAnimating(false), 600);
     return () => clearTimeout(timer);
-  }, [totalPrice]);
+  }, [productPrice]);
 
   return (
     <div className="space-y-6">
@@ -101,42 +100,28 @@ export const FinishCustomizer = memo(({ finishes, basePrice }: FinishCustomizerP
       </div>
 
       <div className="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl">
-        <h3 className="text-lg font-semibold mb-4">Cantidad</h3>
-        <Slider
-          value={[quantity]}
-          onValueChange={([value]) => setQuantity(value)}
-          min={1}
-          max={10}
-          step={1}
-          className="w-full"
-          aria-label="Seleccionar cantidad"
-        />
-        <div className="flex justify-between mt-3">
-          <span className="text-sm text-muted-foreground">1 unidad</span>
-          <span className="text-sm text-muted-foreground">10 unidades</span>
+        <div className="flex items-center gap-2 mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+            <path d="M3 6h18"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <h3 className="text-lg font-semibold">Información importante</h3>
         </div>
-        
-        {/* Contador visual de cantidad */}
-        <div className="flex justify-center mt-4 gap-1">
-          {Array.from({ length: Math.min(quantity, 5) }).map((_, i) => (
-            <div 
-              key={i} 
-              className="w-2 h-2 rounded-full bg-primary"
-              style={{ opacity: 1 - (i * 0.15) }}
-            />
-          ))}
-          {quantity > 5 && (
-            <div className="text-xs text-primary ml-1">+{quantity - 5}</div>
-          )}
-        </div>
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+          Las cantidades pueden ser ajustadas desde el carrito de compras una vez que agregues el producto.
+        </p>
+        <p className="text-sm text-gray-600 dark:text-gray-300">
+          Los tiempos de producción están sujetos al stock disponible de cada producto y acabado seleccionado.
+        </p>
       </div>
 
       <div className="border-t pt-6">
         <div className="flex justify-between items-center">
-          <span className="text-lg font-semibold">Total</span>
+          <span className="text-lg font-semibold">Precio</span>
           <AnimatePresence mode="wait">
             <motion.span 
-              key={totalPrice}
+              key={productPrice}
               className={`text-2xl font-bold ${isPriceAnimating ? 'text-primary' : ''}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ 
@@ -147,7 +132,7 @@ export const FinishCustomizer = memo(({ finishes, basePrice }: FinishCustomizerP
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
             >
-              ${totalPrice.toLocaleString('es-AR')}
+              ${productPrice.toLocaleString('es-AR')}
             </motion.span>
           </AnimatePresence>
         </div>
@@ -160,7 +145,7 @@ export const FinishCustomizer = memo(({ finishes, basePrice }: FinishCustomizerP
             animate={{ opacity: 1, height: 'auto' }}
             transition={{ duration: 0.3 }}
           >
-            Ahorras: ${(basePrice * quantity - totalPrice).toLocaleString('es-AR')}
+            Ahorras: ${(basePrice - productPrice).toLocaleString('es-AR')}
           </motion.div>
         )}
       </div>

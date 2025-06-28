@@ -1,19 +1,10 @@
-import { useState } from "react"
 import { IconButton } from "../../../components/icon-button"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { formatPrice } from "../../../lib/formatPrice"
 import { ProductType } from "../../../types/product"
 import { Heart, ShoppingCart } from "lucide-react"
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
+// Ya no necesitamos los componentes de Select
 
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
@@ -26,16 +17,9 @@ export type InfoProductProps = {
 export const InfoProduct = (props: InfoProductProps) => {
     const { product } = props
 
-    // Estado para manejar la cantidad seleccionada
-    const [quantity, setQuantity] = useState(1)
-
-    // Función para manejar el cambio de cantidad
-    const handleQuantityChange = (value: string) => {
-        setQuantity(Number(value)) // Convertimos el valor a número
-    }
-
-    // Calcular el precio total basado en la cantidad
-    const totalPrice = product.price * quantity
+    // Ya no necesitamos manejar la cantidad aquí, se hará desde el carrito
+    // El precio ahora es simplemente el precio del producto
+    const productPrice = product.price
 
     return (
         <div className="px-6">
@@ -56,26 +40,23 @@ export const InfoProduct = (props: InfoProductProps) => {
                 <Label htmlFor="airplane-mode">Caoba</Label>
             </div>
             <Separator className="my-4" />
-            <div className="flex">
-                <Select value={String(quantity)} onValueChange={handleQuantityChange}>
-                    <SelectTrigger className="w-16 self-center mr-5">
-                        <SelectValue placeholder="1" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup>
-                            <SelectLabel>Cantidad</SelectLabel>
-                            <SelectItem value="1">1</SelectItem>
-                            <SelectItem value="2">2</SelectItem>
-                            <SelectItem value="3">3</SelectItem>
-                            <SelectItem value="4">4</SelectItem>
-                            <SelectItem value="5">5</SelectItem>
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
-                <p className="my-4 text-2xl">{formatPrice(totalPrice)}</p> {/* Mostrar el precio total */}
+            <div className="flex flex-col gap-3">
+                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+                    <div className="flex items-center gap-2 mb-2">
+                        <ShoppingCart size={18} className="text-primary" />
+                        <h3 className="font-medium">Información importante</h3>
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                        Las cantidades pueden ser ajustadas desde el carrito de compras. Los tiempos de producción están sujetos al stock disponible de cada producto.
+                    </p>
+                </div>
+                <div className="flex items-center justify-between">
+                    <span className="font-medium">Precio:</span>
+                    <p className="text-2xl font-semibold">{formatPrice(productPrice)}</p>
+                </div>
             </div>
             <div className="flex items-center gap-5">
-                <Button className="w-full" onClick={() => ({ ...product, quantity })}>Comprar</Button>
+                <Button className="w-full" onClick={() => ({ ...product })}>Comprar</Button>
                 <IconButton
                     onClick={console.log}
                     icon={<ShoppingCart size={20} className={` ${ 'fill-black dark:fill-white'}`} />}
