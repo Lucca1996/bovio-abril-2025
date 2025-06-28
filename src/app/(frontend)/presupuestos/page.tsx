@@ -63,7 +63,6 @@ const tiposAcabados = [
 
 // Opciones adicionales para proyectos (reemplaza la funcionalidad de subir imagen)
 const opcionesAdicionales = [
-  { id: 'ninguna', nombre: 'Sin opciones adicionales', factor: 1, descripcion: 'Proyecto básico' },
   { id: 'herrajes', nombre: 'Herrajes Premium', factor: 1.15, descripcion: 'Herrajes de alta calidad y durabilidad' },
   { id: 'iluminacion', nombre: 'Iluminación LED', factor: 1.2, descripcion: 'Sistema de iluminación integrado' },
   { id: 'personalizado', nombre: 'Diseño Personalizado', factor: 1.25, descripcion: 'Diseños exclusivos a medida' },
@@ -90,7 +89,7 @@ export default function PresupuestosPage() {
   const [imagenReferencia, setImagenReferencia] = useState<File | null>(null);
   
   // Agregar estados faltantes
-  const [opcionAdicional, setOpcionAdicional] = useState<string>('ninguna');
+  const [opcionesSeleccionadas, setOpcionesSeleccionadas] = useState<string[]>([]);
   const [tipoEspacio, _setTipoEspacio] = useState<string>('pequeno');
   const [esProyectoEmpresarial, setEsProyectoEmpresarial] = useState<boolean>(false);
   
@@ -113,9 +112,8 @@ export default function PresupuestosPage() {
     const proyectoSeleccionado = tiposProyecto.find(p => p.id === tipoProyecto);
     const maderaSeleccionada = tiposMadera.find(m => m.id === tipoMadera);
     const acabadoSeleccionado = tiposAcabados.find(a => a.id === tipoAcabado);
-    const opcionSeleccionada = opcionesAdicionales.find(o => o.id === opcionAdicional);
     
-    if (!proyectoSeleccionado || !maderaSeleccionada || !acabadoSeleccionado || !opcionSeleccionada) {
+    if (!proyectoSeleccionado || !maderaSeleccionada || !acabadoSeleccionado) {
       toast.error('Por favor completa todas las selecciones necesarias');
       return;
     }
@@ -125,7 +123,19 @@ export default function PresupuestosPage() {
     const factorUrgencia = factoresUrgencia[urgencia as keyof typeof factoresUrgencia];
     const factorMadera = maderaSeleccionada.factor;
     const factorAcabado = acabadoSeleccionado.factor;
-    const factorOpcion = opcionSeleccionada.factor;
+    
+    // Calcular factor de opciones adicionales (suma de todos los factores seleccionados - cantidad de opciones + 1)
+    let factorOpciones = 1;
+    if (opcionesSeleccionadas.length > 0) {
+      // Obtener la suma de los factores de todas las opciones seleccionadas
+      const sumaFactores = opcionesSeleccionadas.reduce((total, opcionId) => {
+        const opcion = opcionesAdicionales.find(o => o.id === opcionId);
+        return total + (opcion ? opcion.factor - 1 : 0); // Restamos 1 para obtener solo el incremento
+      }, 0);
+      
+      // El factor final es 1 más la suma de los incrementos
+      factorOpciones = 1 + sumaFactores;
+    }
     
     // Aplicar factor de tipo de espacio para proyectos empresariales
     let factorEspacio = 1;
@@ -140,7 +150,7 @@ export default function PresupuestosPage() {
     }
     
     // El precio se calcula por metro cuadrado con todos los factores
-    const total = Math.round(precioBase * factorComplejidad * factorUrgencia * factorMadera * factorAcabado * factorOpcion * factorEspacio * metrosCuadrados);
+    const total = Math.round(precioBase * factorComplejidad * factorUrgencia * factorMadera * factorAcabado * factorOpciones * factorEspacio * metrosCuadrados);
     
     // Calcular tiempo estimado
     let tiempo = '';
@@ -243,7 +253,6 @@ export default function PresupuestosPage() {
     const proyectoSeleccionado = tiposProyecto.find(p => p.id === tipoProyecto);
     const maderaSeleccionada = tiposMadera.find(m => m.id === tipoMadera);
     const acabadoSeleccionado = tiposAcabados.find(a => a.id === tipoAcabado);
-    const opcionSeleccionada = opcionesAdicionales.find(o => o.id === opcionAdicional);
     
     let mensaje = `Hola, estoy interesado en un presupuesto para ${proyectoSeleccionado?.nombre || 'un proyecto de carpintería'}. `;
     
@@ -254,7 +263,18 @@ export default function PresupuestosPage() {
     
     mensaje += `Material: ${maderaSeleccionada?.nombre || 'a definir'}. Acabado: ${acabadoSeleccionado?.nombre || 'a definir'}. `;
     mensaje += `Complejidad: ${complejidad}. Urgencia: ${urgencia}. Metros cuadrados aproximados: ${metrosCuadrados}. `;
-    mensaje += `Opciones adicionales: ${opcionSeleccionada?.nombre || 'Ninguna'}.`;
+    
+    // Agregar opciones adicionales seleccionadas
+    if (opcionesSeleccionadas.length > 0) {
+      const nombresOpciones = opcionesSeleccionadas.map(opcionId => {
+        const opcion = opcionesAdicionales.find(o => o.id === opcionId);
+        return opcion?.nombre || '';
+      }).filter(nombre => nombre !== '');
+      
+      mensaje += `Opciones adicionales: ${nombresOpciones.join(', ')}.`;
+    } else {
+      mensaje += 'Sin opciones adicionales.';
+    }
     
     return `https://wa.me/3816237710?text=${encodeURIComponent(mensaje)}`;
   };
@@ -318,25 +338,6 @@ export default function PresupuestosPage() {
                 )}
                 {!mostrarResultado ? (
                   <div className="space-y-6">
-                    {/* Selector de tipo de proyecto (residencial o empresarial) */}
-                    <div className="mb-6">
-                      <h3 className="text-xl font-semibold text-center mb-4">Tipo de proyecto</h3>
-                      <RadioGroup 
-                        value={esProyectoEmpresarial ? "empresarial" : "residencial"} 
-                        onValueChange={(value) => setEsProyectoEmpresarial(value === "empresarial")}
-                        className="flex justify-center space-x-8 mt-2"
-                      >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="residencial" id="tipo-residencial" />
-                          <Label htmlFor="tipo-residencial">Residencial</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="empresarial" id="tipo-empresarial" />
-                          <Label htmlFor="tipo-empresarial">Empresarial</Label>
-                        </div>
-                      </RadioGroup>
-                    </div>
-                    
                     {pasoActual === 1 && (
                       <motion.div 
                         initial={{ opacity: 0, x: -20 }}
@@ -345,6 +346,22 @@ export default function PresupuestosPage() {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="space-y-6"
                       >
+                        <h3 className="text-xl font-semibold text-center mb-4">Tipo de proyecto</h3>
+                        <RadioGroup 
+                          value={esProyectoEmpresarial ? "empresarial" : "residencial"} 
+                          onValueChange={(value) => setEsProyectoEmpresarial(value === "empresarial")}
+                          className="flex justify-center space-x-8 mb-6"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="residencial" id="tipo-residencial" />
+                            <Label htmlFor="tipo-residencial">Residencial</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="empresarial" id="tipo-empresarial" />
+                            <Label htmlFor="tipo-empresarial">Empresarial</Label>
+                          </div>
+                        </RadioGroup>
+                        
                         <h3 className="text-xl font-semibold text-center mb-6">¿Qué tipo de trabajo necesitas?</h3>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                           {tiposProyecto
@@ -493,24 +510,48 @@ export default function PresupuestosPage() {
                           </div>
                           
                           <div className="mt-8">
-                            <h4 className="text-lg font-medium mb-4">Opciones adicionales</h4>
+                            <h4 className="text-lg font-medium mb-4">Opciones adicionales (selecciona las que desees)</h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                              {opcionesAdicionales.map((opcion) => (
-                                <div 
-                                  key={opcion.id}
-                                  onClick={() => setOpcionAdicional(opcion.id)}
-                                  className={`p-4 border rounded-lg cursor-pointer transition-all hover:shadow-md ${
-                                    opcionAdicional === opcion.id 
-                                      ? 'border-slate-600 bg-slate-50 dark:bg-slate-700/30 shadow-md' 
-                                      : 'border-slate-200 dark:border-slate-700'
-                                  }`}
-                                >
-                                  <h4 className="font-medium">{opcion.nombre}</h4>
-                                  <p className="text-sm text-slate-500 dark:text-slate-400">
-                                    {opcion.descripcion}
-                                  </p>
-                                </div>
-                              ))}
+                              {opcionesAdicionales.map((opcion) => {
+                                const isSelected = opcionesSeleccionadas.includes(opcion.id);
+                                return (
+                                  <div 
+                                    key={opcion.id}
+                                    onClick={() => {
+                                      if (isSelected) {
+                                        // Si ya está seleccionada, la quitamos
+                                        setOpcionesSeleccionadas(opcionesSeleccionadas.filter(id => id !== opcion.id));
+                                      } else {
+                                        // Si no está seleccionada, la agregamos
+                                        setOpcionesSeleccionadas([...opcionesSeleccionadas, opcion.id]);
+                                      }
+                                    }}
+                                    className={`p-4 border rounded-lg cursor-pointer transition-all hover:shadow-md ${
+                                      isSelected 
+                                        ? 'border-slate-600 bg-slate-50 dark:bg-slate-700/30 shadow-md' 
+                                        : 'border-slate-200 dark:border-slate-700'
+                                    }`}
+                                  >
+                                    <div className="flex justify-between items-center">
+                                      <h4 className="font-medium">{opcion.nombre}</h4>
+                                      {isSelected && (
+                                        <div className="bg-slate-600 text-white rounded-full p-1">
+                                          <Check className="h-3 w-3" />
+                                        </div>
+                                      )}
+                                    </div>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                                      {opcion.descripcion}
+                                    </p>
+                                    <div className="mt-2 h-1 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                                      <div 
+                                        className="h-full bg-slate-600 rounded-full transition-all duration-300"
+                                        style={{ width: `${(opcion.factor - 1) * 100}%` }}
+                                      />
+                                    </div>
+                                  </div>
+                                );
+                              })}
                             </div>
                           </div>
                         </div>
@@ -646,6 +687,22 @@ export default function PresupuestosPage() {
                           </p>
                         </div>
                       </div>
+                      
+                      {opcionesSeleccionadas.length > 0 && (
+                        <div className="mt-4 border-t pt-4 border-slate-200 dark:border-slate-700">
+                          <p className="text-sm text-slate-500 dark:text-slate-400 mb-2">Opciones adicionales incluidas:</p>
+                          <div className="flex flex-wrap gap-2">
+                            {opcionesSeleccionadas.map(opcionId => {
+                              const opcion = opcionesAdicionales.find(o => o.id === opcionId);
+                              return opcion ? (
+                                <div key={opcion.id} className="text-xs bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-full flex items-center">
+                                  <Check className="h-3 w-3 mr-1 text-green-500" /> {opcion.nombre}
+                                </div>
+                              ) : null;
+                            })}
+                          </div>
+                        </div>
+                      )}
                     </div>
                     
                     <div className="space-y-4">
