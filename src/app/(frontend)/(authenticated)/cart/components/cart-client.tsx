@@ -44,12 +44,14 @@ export const CartClient: React.FC<CartClientProps> = ({ initialCart, cartIds = [
 
   // Efecto para actualizar el carrito cuando cambian los cartIds
   useEffect(() => {
-    // Filtrar los productos del carrito basado en los cartIds actualizados
-    const updatedCart = initialCart.filter(product => cartIds.includes(product.id))
-    setCart(updatedCart)
-  }, [cartIds, initialCart])
+    // Este efecto sincroniza el estado local con los cartIds proporcionados
+    if (cartIds.length > 0) {
+      const updatedCart = initialCart.filter(product => cartIds.includes(product.id))
+      setCart(updatedCart)
+    }
+  }, [cartIds, initialCart]) // Incluir las dependencias requeridas
 
-  // Efecto para actualizar el carrito cuando cambia el contador global
+  // Efecto para actualizar el carrito cuando se monta el componente
   useEffect(() => {
     const refreshCart = async () => {
       try {
@@ -78,13 +80,11 @@ export const CartClient: React.FC<CartClientProps> = ({ initialCart, cartIds = [
       }
     }
     
-    // Refrescar el carrito cuando cambie el contador global
+    // Refrescar el carrito solo cuando el componente se monte
     refreshCart()
     
-    // También podemos refrescar el carrito cuando el componente se monte
-    router.refresh()
-    
-  }, [cartCount, router, quantities])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) // Deshabilitamos la regla para evitar ciclos infinitos mientras mantenemos la funcionalidad
 
   // Efecto para actualizar el carrito cuando se añade un nuevo producto
   useEffect(() => {
@@ -111,15 +111,20 @@ export const CartClient: React.FC<CartClientProps> = ({ initialCart, cartIds = [
       }
     }
 
-    // Verificar si hay cambios en el contador del carrito
-    fetchCartProducts()
-  }, [cartCount, quantities])
+    // Solo ejecutar cuando cambie el cartCount y sea mayor que 0
+    if (cartCount > 0) {
+      fetchCartProducts()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartCount]) // Deshabilitamos la regla para evitar ciclos infinitos mientras mantenemos la funcionalidad
 
   const handleQuantityChange = (productId: number, increment: boolean) => {
+    // Solo actualizar las cantidades localmente, sin afectar el contador global
     setQuantities((prev) => ({
       ...prev,
       [productId]: Math.max(1, prev[productId] + (increment ? 1 : -1)),
     }))
+    // No llamar a updateCartCount aquí, ya que solo estamos cambiando la cantidad
   }
 
   const handleRemoveItem = async (productId: number) => {
