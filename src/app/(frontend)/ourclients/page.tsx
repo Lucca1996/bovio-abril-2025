@@ -31,9 +31,9 @@ const clientsData: Client[] = [
   },
   {
     id: 2,
-    name: 'Constructora Futuro',
-    category: 'Construcción',
-    logo: 'https://orbesan.es/wp-content/uploads/2021/04/empresa-constructora.jpg',
+    name: 'Centro de salud',
+    category: 'Salud',
+    logo: 'https://www.comunicaciontucuman.gob.ar/fotos/cache/notas/2023/10/04/730x473_231004123423_89680.jpg',
     description: 'Proyectos arquitectónicos sostenibles con enfoque en eficiencia energética.',
     story: [
       { title: 'Consultoría', description: 'Evaluación de necesidades específicas del proyecto.' },
