@@ -254,36 +254,7 @@ export default function Page() {
                     </div>
 
                     {/* Sección de Testimonios en formato carrusel */}
-                    <div className="mb-20">
-                        <h2 className="text-3xl font-bold text-center mb-12">Lo que dicen nuestros clientes</h2>
-                        <div className="bg-white rounded-xl shadow-md p-8 relative">
-                            <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                                </svg>
-                            </div>
-                            <div className="text-center pt-6">
-                                <p className="text-lg text-gray-700 italic mb-6">
-                                    Bovio SAS transformó nuestra oficina con un diseño que refleja perfectamente nuestra identidad corporativa. El equipo entendió nuestras necesidades desde el primer momento y el resultado superó todas nuestras expectativas.
-                                </p>
-                                <div className="flex items-center justify-center">
-                                    <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                                        <Image 
-                                            src="https://infonegocios.info/content/images/2024/02/05/437195/conversions/empresas--medium-size.jpg" 
-                                            alt="Cliente satisfecho" 
-                                            width={48} 
-                                            height={48}
-                                            className="object-cover"
-                                        />
-                                    </div>
-                                    <div className="text-left">
-                                        <h4 className="font-bold">María González</h4>
-                                        <p className="text-sm text-gray-600">Directora de Marketing, Empresa XYZ</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  
 
                     {/* CTA final */}
                     <div className="text-center bg-gradient-to-r from-primary/10 to-primary/20 rounded-3xl p-12">

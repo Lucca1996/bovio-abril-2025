@@ -9,7 +9,7 @@ import { Gallery } from './components/gallery';
 import { TechnicalDetails } from './components/technical-details';
 import { FinishCustomizer } from './components/finish-customizer';
 import { Button } from '@/components/ui/button';
-import { Heart, ShoppingCart, ChevronRight } from 'lucide-react';
+import { Heart, ShoppingCart, ChevronRight, MessageSquare } from 'lucide-react';
 import { toggleFavorite } from '../../actions/favoriteActions';
 import { toggleCart } from '../../actions/cartActions';
 import { toast } from 'sonner';
@@ -29,6 +29,7 @@ export default function ProductPage() {
     const [isFavorite, setIsFavorite] = useState(false);
     const [isCart, setIsCart] = useState(false);
     const [scrollProgress, setScrollProgress] = useState(0);
+        const [selectedFinishInfo, setSelectedFinishInfo] = useState<string>('');
     const mainRef = useRef<HTMLElement>(null);
     
     // Usar los stores globales
@@ -214,7 +215,6 @@ export default function ProductPage() {
                             
                         </motion.div>
 
-                        {/* Personalizador de acabados */}
                         {product.finishes && product.finishes.length > 0 && (
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }}
@@ -225,27 +225,38 @@ export default function ProductPage() {
                                 <FinishCustomizer
                                     finishes={product.finishes}
                                     basePrice={product.price}
+                                    onFinishChange={(finish) => setSelectedFinishInfo(`Acabado seleccionado: ${finish.type}`)}
                                 />
                             </motion.div>
                         )}
-                        <div className="flex items-center gap-4 my-8">
+                        <div className="flex flex-col gap-4 my-8">
                             <Button
                                 size="lg"
-                                className="flex-1 py-6 text-base transition-all duration-300 hover:scale-105 hover:shadow-md"
-                                onClick={handleCartClick}
+                                className="w-full py-6 text-base transition-all duration-300 hover:scale-105 hover:shadow-md bg-green-600 hover:bg-green-700 text-white"
+                                onClick={() => window.open(`https://wa.me/+5493816237710?text=Hola, estoy interesado en el producto: ${product.title}${selectedFinishInfo ? `. ${selectedFinishInfo}` : ''}`, '_blank')}
                             >
-                                <ShoppingCart className="w-5 h-5 mr-2" />
-                                {isCart ? 'Eliminar del carrito' : 'Agregar al carrito'}
+                                <MessageSquare className="w-5 h-5 mr-2" />
+                                Consultar por WhatsApp
                             </Button>
-                            <Button
-                                size="lg"
-                                variant="outline"
-                                onClick={handleFavoriteClick}
-                                className={`py-6 transition-all duration-300 hover:scale-105 ${isFavorite ? "text-red-500 border-red-200 hover:border-red-300 hover:bg-red-50" : ""}`}
-                                aria-label={isFavorite ? "Eliminar de favoritos" : "Agregar a favoritos"}
-                            >
-                                <Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />
-                            </Button>
+                            <div className="flex items-center gap-4">
+                                <Button
+                                    size="lg"
+                                    className="flex-1 py-6 text-base transition-all duration-300 hover:scale-105 hover:shadow-md"
+                                    onClick={handleCartClick}
+                                >
+                                    <ShoppingCart className="w-5 h-5 mr-2" />
+                                    {isCart ? 'Eliminar del carrito' : 'Agregar al carrito'}
+                                </Button>
+                                <Button
+                                    size="lg"
+                                    variant="outline"
+                                    onClick={handleFavoriteClick}
+                                    className={`py-6 transition-all duration-300 hover:scale-105 ${isFavorite ? "text-red-500 border-red-200 hover:border-red-300 hover:bg-red-50" : ""}`}
+                                    aria-label={isFavorite ? "Eliminar de favoritos" : "Agregar a favoritos"}
+                                >
+                                    <Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />
+                                </Button>
+                            </div>
                         </div>
                         {/* Información adicional */}
                         <motion.div 

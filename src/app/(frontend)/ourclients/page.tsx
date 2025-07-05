@@ -16,21 +16,9 @@ type Client = {
 
 // Datos de ejemplo para los clientes
 const clientsData: Client[] = [
+ 
   {
     id: 1,
-    name: 'Globant',
-    category: 'Tecnología',
-    logo: 'https://clustertucuman.org.ar/wp-content/uploads/empresa-de-tecnologia.jpg',
-    description: 'Transformación digital para empresas líderes en el sector tecnológico.',
-    story: [
-      { title: 'Descubrimiento', description: 'Análisis profundo de necesidades y objetivos.' },
-      { title: 'Estrategia', description: 'Desarrollo de plan de acción personalizado.' },
-      { title: 'Implementación', description: 'Ejecución de soluciones tecnológicas avanzadas.' },
-      { title: 'Resultados', description: 'Incremento de eficiencia operativa en un 45%.' }
-    ]
-  },
-  {
-    id: 2,
     name: 'Centro de salud',
     category: 'Salud',
     logo: 'https://www.comunicaciontucuman.gob.ar/fotos/cache/notas/2023/10/04/730x473_231004123423_89680.jpg',
@@ -43,7 +31,7 @@ const clientsData: Client[] = [
     ]
   },
   {
-    id: 3,
+    id: 2,
     name: 'Hospital Padilla',
     category: 'Salud',
     logo: 'https://msptucuman.gov.ar/wordpress/wp-content/uploads/2015/07/portada-padilla-2-1024x512.jpg',
@@ -53,45 +41,6 @@ const clientsData: Client[] = [
       { title: 'Planificación', description: 'Desarrollo de roadmap tecnológico.' },
       { title: 'Desarrollo', description: 'Implementación de plataforma digital integrada.' },
       { title: 'Monitoreo', description: 'Mejora continua basada en datos de usuarios.' }
-    ]
-  },
-  {
-    id: 4,
-    name: 'Finanzas Futuras',
-    category: 'Finanzas',
-    logo: 'https://www.elcorreo.ae/asset/thumbnail,992,558,center,center/media/elcorreo/images/2024/10/27/2024102710123778257.jpg',
-    description: 'Transformación digital en el sector financiero con enfoque en seguridad.',
-    story: [
-      { title: 'Auditoría', description: 'Evaluación de infraestructura y procesos actuales.' },
-      { title: 'Estrategia', description: 'Diseño de arquitectura segura y escalable.' },
-      { title: 'Implementación', description: 'Desarrollo e integración de sistemas.' },
-      { title: 'Resultados', description: 'Reducción de costos operativos en un 30%.' }
-    ]
-  },
-  {
-    id: 5,
-    name: 'Escuela Raul Colombres',
-    category: 'Educación',
-    logo: 'https://www.radiobicentenario.com.ar/radiobicentenario/fotos/notas/2022/07/04/47001_20220704093757.jpg',
-    description: 'Plataformas educativas innovadoras para aprendizaje híbrido.',
-    story: [
-      { title: 'Análisis', description: 'Estudio de necesidades educativas específicas.' },
-      { title: 'Diseño', description: 'Creación de experiencias de aprendizaje personalizadas.' },
-      { title: 'Desarrollo', description: 'Implementación de plataforma interactiva.' },
-      { title: 'Evaluación', description: 'Mejora de resultados académicos en un 25%.' }
-    ]
-  },
-  {
-    id: 6,
-    name: 'Red de supermercados',
-    category: 'Retail',
-    logo: 'https://tynmagazine.com/wp-content/uploads/sites/3/2022/04/Immagine-Copertina-Webinar-Corso-sul-commercio-scaled-1-930x620.jpg',
-    description: 'Estrategias omnicanal para comercios minoristas en expansión.',
-    story: [
-      { title: 'Diagnóstico', description: 'Análisis de canales y experiencia de cliente.' },
-      { title: 'Estrategia', description: 'Diseño de journey omnicanal integrado.' },
-      { title: 'Implementación', description: 'Desarrollo de plataforma e-commerce avanzada.' },
-      { title: 'Optimización', description: 'Incremento de conversión en un 35%.' }
     ]
   },
 ];
@@ -334,47 +283,6 @@ export default function OurClients() {
           </div>
         </section>
       )}
-
-      {/* Testimonials Section */}
-      <section className="py-16 px-4 md:px-8 bg-gradient-to-r from-slate-50 to-purple-50 dark:from-slate-900/20 dark:to-purple-900/20 transition-colors duration-300">
-        <div 
-          className="max-w-7xl mx-auto opacity-0"
-          ref={el => {animationRefs.current[filteredClients.length + 5] = el}}
-        >
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
-            Lo que dicen nuestros clientes
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
-              <blockquote 
-                key={item}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md relative"
-              >
-                <svg className="absolute top-0 left-0 transform -translate-x-3 -translate-y-3 h-8 w-8 text-slate-500 dark:text-slate-400" fill="currentColor" viewBox="0 0 32 32">
-                  <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-                </svg>
-                <p className="text-gray-600 dark:text-gray-300 mb-4 mt-6 italic">
-                  La colaboración con este equipo ha sido transformadora para nuestra empresa. Su enfoque estratégico y soluciones innovadoras superaron nuestras expectativas.
-                </p>
-                <footer className="flex items-center mt-4">
-                  <div className="flex-shrink-0 mr-3">
-                    <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-900 flex items-center justify-center">
-                      <span className="text-slate-600 dark:text-slate-400 font-bold">
-                        {String.fromCharCode(64 + item)}
-                      </span>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-gray-900 dark:text-white font-semibold">Director Ejecutivo</p>
-                    <p className="text-gray-500 dark:text-gray-400 text-sm">Empresa Cliente {item}</p>
-                  </div>
-                </footer>
-              </blockquote>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-16 px-4 md:px-8">

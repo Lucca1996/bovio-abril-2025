@@ -7,7 +7,7 @@ import { formatPrice } from '@/app/(frontend)/lib/formatPrice'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
-import { X, Plus, Minus, ArrowLeft, Shield, Truck, CreditCard } from 'lucide-react'
+import { X, Plus, Minus, ArrowLeft, Shield, Truck, CreditCard, MessageSquare } from 'lucide-react'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { toggleCart } from '@/app/(frontend)/actions/cartActions'
@@ -168,6 +168,27 @@ export const CartClient: React.FC<CartClientProps> = ({ initialCart, cartIds = [
     return ''
   }
 
+  // Función para generar el mensaje de WhatsApp con los productos del carrito
+  const generateWhatsAppMessage = () => {
+    let message = 'Hola, estoy interesado en los siguientes productos:\n\n'
+    
+    cart.forEach((product) => {
+      const quantity = quantities[product.id] || 1
+      message += `• ${product.title} - Cantidad: ${quantity} - Precio: ${formatPrice(product.price * quantity)}\n`
+    })
+    
+    message += `\nSubtotal: ${formatPrice(calculateSubtotal())}`
+    
+    if (isValidCoupon) {
+      message += `\nDescuento (10%): -${formatPrice(calculateSubtotal() * 0.1)}`
+    }
+    
+    message += `\nEnvío: ${calculateSubtotal() > 1000 ? 'Gratis' : formatPrice(50)}`
+    message += `\nTotal: ${formatPrice(calculateTotal())}`
+    
+    return encodeURIComponent(message)
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -293,8 +314,20 @@ export const CartClient: React.FC<CartClientProps> = ({ initialCart, cartIds = [
                 <span>{formatPrice(calculateTotal())}</span>
               </div>
 
-              <Button size="lg" className="w-full" onClick={() => router.push('/checkout')}>
-                Proceder al pago
+              <Button 
+                size="lg" 
+                className="w-full bg-green-600 hover:bg-green-700 flex items-center justify-center gap-2"
+                onClick={() => {
+                  if (cart.length > 0) {
+                    window.open(`https://wa.me/5493816237710?text=${generateWhatsAppMessage()}`, '_blank')
+                  } else {
+                    toast.error('Tu carrito está vacío')
+                  }
+                }}
+                disabled={cart.length === 0}
+              >
+                <MessageSquare size={20} />
+                Consultar por WhatsApp
               </Button>
 
               <div className="flex items-center gap-2 text-sm text-gray-500">

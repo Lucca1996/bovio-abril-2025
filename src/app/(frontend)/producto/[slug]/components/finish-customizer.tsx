@@ -15,9 +15,10 @@ interface FinishCustomizerProps {
     image: string;
   }[];
   basePrice: number;
+  onFinishChange?: (finish: { id: string; type: string; priceMultiplier: number; image: string }) => void;
 }
 
-export const FinishCustomizer = memo(({ finishes, basePrice }: FinishCustomizerProps) => {
+export const FinishCustomizer = memo(({ finishes, basePrice, onFinishChange }: FinishCustomizerProps) => {
   const [selectedFinish, setSelectedFinish] = useState(0);
   const [isPriceAnimating, setIsPriceAnimating] = useState(false);
 
@@ -27,6 +28,13 @@ export const FinishCustomizer = memo(({ finishes, basePrice }: FinishCustomizerP
     basePrice * currentFinish.priceMultiplier, 
     [basePrice, currentFinish.priceMultiplier]
   );
+
+  // Notificar al componente padre cuando cambia el acabado seleccionado
+  useEffect(() => {
+    if (onFinishChange) {
+      onFinishChange(currentFinish);
+    }
+  }, [currentFinish, onFinishChange]);
 
   // Activar animación de pulso cuando cambia el precio
   useEffect(() => {
