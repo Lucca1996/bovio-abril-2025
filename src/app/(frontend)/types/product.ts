@@ -48,10 +48,7 @@ export interface ProductType {
   isFeatured: boolean
   isActive: boolean
   stock: number
-  warranty: {
-    years: number
-    description: string
-  }
+  
   publishedAt: string
   slug: string
   slugLock: boolean

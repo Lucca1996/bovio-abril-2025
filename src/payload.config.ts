@@ -14,6 +14,9 @@ import brevoAdapter from './utils/brevoAdapter'
 import { Categories } from './collections/Categories'
 import { Styles } from './collections/Styles'
 import { Products } from './collections/Products'
+import { Uso } from './collections/Uso'
+import { Area } from './collections/Area'
+import { Tipo } from './collections/Tipo'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -26,7 +29,7 @@ export default buildConfig({
     },
   },
   email: brevoAdapter(),
-  collections: [Users, Media, Styles, Customers, Categories, Products],
+  collections: [Users, Media, Styles, Customers, Categories, Products, Uso, Area, Tipo],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

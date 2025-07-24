@@ -3,7 +3,6 @@ import React from 'react'
 import './styles.css'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
-import { getUser } from './(authenticated)/actions/getUser'
 import { Toaster } from 'sonner'
 import { ClientLayout } from './components/client-layout' // Import ClientLayout
 import { ThemeProvider } from '@/components/theme-provider'
@@ -24,13 +23,11 @@ export const metadata = {
 
 export const dynamic = 'force-dynamic';
 
-export default async function FrontendLayout({
+export default function FrontendLayout({
     children,
 }: {
     children: React.ReactNode
 }) {
-    const user = await getUser();
-
     return (
         <html lang="es" suppressHydrationWarning>
             <body>
@@ -41,7 +38,7 @@ export default async function FrontendLayout({
                     disableTransitionOnChange
                 >
                     <div className="min-h-screen flex flex-col">
-                        <Navbar user={user} />
+                        <Navbar />
                         {/* Usar ClientLayout para manejar las animaciones */}
                         <ClientLayout>
                             {children}

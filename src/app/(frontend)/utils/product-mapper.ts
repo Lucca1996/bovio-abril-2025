@@ -52,7 +52,6 @@ export const mapPayloadProductToProductType = (product: Product): ProductType =>
     isFeatured: product.isFeatured || false,
     isActive: product.isActive || false,
     stock: product.stock,
-    warranty: product.warranty,
     publishedAt: product.publishedAt || '',
     slug: product.slug || '',
     slugLock: product.slugLock || false,

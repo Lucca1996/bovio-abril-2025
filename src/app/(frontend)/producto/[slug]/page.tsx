@@ -17,7 +17,7 @@ import { getUser } from '../../(authenticated)/actions/getUser';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useCartStore } from '@/store/useCartStore'; // Importar el store global
-import { useFavoriteStore } from '@/store/useFavoriteStore'; // Importar el store de favoritos si existe
+import { useHydratedFavoriteStore } from '@/store/useFavoriteStore'; // Importar el store de favoritos si existe
 
 export const dynamic = 'force-dynamic';
 
@@ -34,7 +34,7 @@ export default function ProductPage() {
     
     // Usar los stores globales
     const { updateCartCount } = useCartStore();
-    const { updateFavoritesCount } = useFavoriteStore();
+    const { updateFavoritesCount } = useHydratedFavoriteStore();
 
     // Efecto combinado para cargar producto y datos de usuario
     useEffect(() => {
@@ -99,7 +99,7 @@ export default function ProductPage() {
             await toggleFavorite(product.id);
             setIsFavorite(!isFavorite);
             // Actualizar el contador global de favoritos
-            updateFavoritesCount(!isFavorite);
+            updateFavoritesCount();
             toast.success(isFavorite ? 'Producto eliminado de favoritos' : 'Producto agregado a favoritos');
         } catch (_error) {
             toast.error('Error al actualizar favoritos');
@@ -112,7 +112,7 @@ export default function ProductPage() {
             await toggleCart(product.id);
             setIsCart(!isCart);
             // Actualizar el contador global del carrito
-            updateCartCount(!isCart);
+            updateCartCount();
             toast.success(isCart ? 'Producto eliminado del carrito' : 'Producto agregado al carrito');
         } catch (_error) {
             toast.error('Error al actualizar el carrito');
@@ -268,7 +268,7 @@ export default function ProductPage() {
                             <div className="p-5 border rounded-xl bg-gray-50 dark:bg-gray-800/50 hover:shadow-md transition-all duration-300 hover:scale-105">
                                 <h3 className="font-semibold mb-2">Garantía</h3>
                                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                                    {product.warranty?.years || 1} años de garantía
+                                   
                                 </p>
                             </div>
                             <div className="p-5 border rounded-xl bg-gray-50 dark:bg-gray-800/50 hover:shadow-md transition-all duration-300 hover:scale-105">

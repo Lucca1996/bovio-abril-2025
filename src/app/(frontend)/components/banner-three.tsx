@@ -3,7 +3,8 @@
 import Link from "next/link"
 import { buttonVariants } from "@/components/ui/button"
 import { useInView } from "react-intersection-observer"
-import { Percent } from "lucide-react"
+import { Gift, Instagram } from "lucide-react"
+import Image from "next/image"
 
 export const BannerThree = () => {
     // Usar Intersection Observer para detectar cuando el componente está en el viewport
@@ -43,11 +44,11 @@ export const BannerThree = () => {
             ></div>
             
             {/* Contenido con animaciones */}
-            <div className="relative z-10 neumorph p-8 rounded-2xl max-w-2xl mx-auto transform transition-all duration-700 ease-out will-change-transform">
-                <div className="flex items-center justify-center mb-4">
+            <div className="relative z-10 neumorph p-8 rounded-2xl max-w-4xl mx-auto transform transition-all duration-700 ease-out will-change-transform">
+                <div className="flex items-center justify-center mb-6">
                     <div className={`bg-primary/20 p-3 rounded-full transition-all duration-700 ${inView ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-8 opacity-0 scale-90'}`}
                         style={{ transitionDelay: '100ms' }}>
-                        <Percent size={32} className="text-primary" />
+                        <Gift size={32} className="text-primary" />
                     </div>
                 </div>
                 
@@ -56,38 +57,75 @@ export const BannerThree = () => {
                     className={`uppercase font-black text-xl sm:text-2xl md:text-3xl text-primary mb-3 transition-all duration-700 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
                     style={{ transitionDelay: '200ms' }}
                 >
-                    Consigue hasta un -25%
+                    🎉 Sorteo Semanal en Instagram
                 </h2>
                 
                 <h3 
-                    className={`text-lg sm:text-xl mb-6 transition-all duration-700 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
+                    className={`text-lg sm:text-xl mb-8 transition-all duration-700 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
                     style={{ transitionDelay: '400ms' }}
                 >
-                    -25% en tu próximo producto al gastar $ 350.000
+                    Cada semana sorteamos productos únicos de carpintería
                 </h3>
                 
+                {/* Productos del sorteo */}
                 <div 
-                    className={`max-w-md mx-auto sm:flex justify-center gap-8 mt-5 transition-all duration-700 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
-                    style={{ transitionDelay: '600ms' }}
+                    className={`flex flex-col sm:flex-row items-center justify-center gap-8 mb-8 transition-all duration-700 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
+                    style={{ transitionDelay: '500ms' }}
+                >
+                    <div className="flex flex-col items-center group">
+                        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg transform group-hover:scale-105 transition-transform duration-300">
+                            <Image 
+                                src="https://i.pinimg.com/originals/c8/8b/28/c88b288f7a84765c42dee38e83bfc7cc.jpg" 
+                                alt="Prensa de madera artesanal" 
+                                width={120} 
+                                height={120}
+                                className="w-32 h-32"
+
+                            />
+                        </div>
+                        <p className="text-sm mt-2 font-medium text-gray-600 dark:text-gray-300">Mesitas de mate</p>
+                    </div>
+                    
+                    <div className="flex flex-col items-center group">
+                        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg transform group-hover:scale-105 transition-transform duration-300">
+                            <Image 
+                                src="https://http2.mlstatic.com/D_NQ_NP_831727-MLA44764991425_012021-O.webp" 
+                                alt="Macetas de madera" 
+                                width={120} 
+                                height={120}
+                                className="w-32 h-32"
+                            />
+                        </div>
+                        <p className="text-sm mt-2 font-medium text-gray-600 dark:text-gray-300">Macetas de Madera</p>
+                    </div>
+                </div>
+                
+                <div 
+                    className={`max-w-md mx-auto sm:flex justify-center gap-6 mt-6 transition-all duration-700 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
+                    style={{ transitionDelay: '700ms' }}
                 >
                     <Link 
-                        href="/catalogo" 
-                        className={`${buttonVariants()} relative overflow-hidden group transform hover:scale-105 transition-all duration-300`}
+                        href="https://www.instagram.com/bovio.sas/" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`${buttonVariants()} relative overflow-hidden group transform hover:scale-105 transition-all duration-300 flex items-center gap-2`}
                     >
-                        <span className="relative z-10">Comprar</span>
+                        <Instagram size={20} />
+                        <span className="relative z-10">Seguir en Instagram</span>
                         <span 
-                            className="absolute inset-0 bg-gradient-to-r from-primary to-primary-dark opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                             aria-hidden="true"
                         ></span>
                     </Link>
                     
-                    <Link 
-                        href="/about" 
-                        className={`${buttonVariants({ variant: "outline" })} mt-4 sm:mt-0 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300`}
-                    >
-                        Más información
-                    </Link>
                 </div>
+                
+                <p 
+                    className={`text-sm text-gray-500 dark:text-gray-400 mt-6 transition-all duration-700 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
+                    style={{ transitionDelay: '800ms' }}
+                >
+                    ¡Síguenos para participar en el próximo sorteo!
+                </p>
             </div>
         </section>
     )

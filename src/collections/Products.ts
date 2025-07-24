@@ -150,6 +150,24 @@ export const Products: CollectionConfig = {
       required: true,
       
     },
+    {
+      type: 'relationship',
+      relationTo: 'uso',
+      name: 'uso',
+      required: true,
+    },
+    {
+      type: 'relationship',
+      relationTo: 'area',
+      name: 'area',
+      required: true,
+    },
+    {
+      type: 'relationship',
+      relationTo: 'tipo',
+      name: 'tipo',
+      required: true,
+    },
     
     {
       name: 'isFeatured', // required
@@ -168,23 +186,6 @@ export const Products: CollectionConfig = {
       type: 'number',
       required: true,
       defaultValue: 0,
-    },
-    {
-      name: 'warranty',
-      type: 'group',
-      fields: [
-        {
-          name: 'years',
-          type: 'number',
-          required: true,
-          defaultValue: 10,
-        },
-        {
-          name: 'description',
-          type: 'textarea',
-          required: true,
-        }
-      ]
     },
     {
       name: 'publishedAt',

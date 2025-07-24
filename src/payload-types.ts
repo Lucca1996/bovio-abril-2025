@@ -73,6 +73,9 @@ export interface Config {
     customers: Customer;
     categories: Category;
     products: Product;
+    uso: Uso;
+    area: Area;
+    tipo: Tipo;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -85,6 +88,9 @@ export interface Config {
     customers: CustomersSelect<false> | CustomersSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    uso: UsoSelect<false> | UsoSelect<true>;
+    area: AreaSelect<false> | AreaSelect<true>;
+    tipo: TipoSelect<false> | TipoSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -289,13 +295,12 @@ export interface Product {
   price: number;
   category: number | Category;
   style: number | Style;
+  uso: number | Uso;
+  area: number | Area;
+  tipo: number | Tipo;
   isFeatured?: boolean | null;
   isActive?: boolean | null;
   stock: number;
-  warranty: {
-    years: number;
-    description: string;
-  };
   publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
@@ -312,6 +317,48 @@ export interface Category {
   slug: string;
   description?: string | null;
   image?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "uso".
+ */
+export interface Uso {
+  id: number;
+  title: string;
+  description?: string | null;
+  imgUrl?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "area".
+ */
+export interface Area {
+  id: number;
+  title: string;
+  description?: string | null;
+  imgUrl?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tipo".
+ */
+export interface Tipo {
+  id: number;
+  title: string;
+  description?: string | null;
+  imgUrl?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -345,6 +392,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'products';
         value: number | Product;
+      } | null)
+    | ({
+        relationTo: 'uso';
+        value: number | Uso;
+      } | null)
+    | ({
+        relationTo: 'area';
+        value: number | Area;
+      } | null)
+    | ({
+        relationTo: 'tipo';
+        value: number | Tipo;
       } | null);
   globalSlug?: string | null;
   user:
@@ -559,16 +618,52 @@ export interface ProductsSelect<T extends boolean = true> {
   price?: T;
   category?: T;
   style?: T;
+  uso?: T;
+  area?: T;
+  tipo?: T;
   isFeatured?: T;
   isActive?: T;
   stock?: T;
-  warranty?:
-    | T
-    | {
-        years?: T;
-        description?: T;
-      };
   publishedAt?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "uso_select".
+ */
+export interface UsoSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  imgUrl?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "area_select".
+ */
+export interface AreaSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  imgUrl?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tipo_select".
+ */
+export interface TipoSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  imgUrl?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;

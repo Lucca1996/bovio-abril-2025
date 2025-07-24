@@ -7,11 +7,8 @@ import { useRouter } from 'next/navigation'
 import { Expand, Heart, ShoppingCart } from 'lucide-react'
 import { ProductType } from '../../types/product'
 import { formatPrice } from '../../lib/formatPrice'
-import { useState, useEffect } from 'react'
-import { toggleFavorite } from '../../actions/favoriteActions'
-import { toggleCart } from '../../actions/cartActions'
 import { toast } from 'sonner'
-import { useFavoriteStore } from '@/store/useFavoriteStore'
+import { useHydratedFavoriteStore } from '@/store/useFavoriteStore'
 import { useCartStore } from '@/store/useCartStore'
 import Image from 'next/image'
 import { getImageUrl } from '../../lib/getImageUrl'
@@ -22,10 +19,6 @@ interface ProductCardProps extends ProductType {
   onCartRemoved?: () => void
   initialIsFavorite?: boolean
   initialIsCart?: boolean
-}
-
-interface AuthError {
-  message: string;
 }
 
 export const ProductCard = (props: ProductCardProps) => {
@@ -39,68 +32,55 @@ export const ProductCard = (props: ProductCardProps) => {
     id,
     onFavoriteRemoved,
     onCartRemoved,
-    initialIsFavorite,
-    initialIsCart,
   } = props
   const router = useRouter()
-  const [isFavorite, setIsFavorite] = useState(initialIsFavorite || false)
-  const [isCart, setIsCart] = useState(initialIsCart || false)
-  const { updateFavoritesCount } = useFavoriteStore()
-  const { updateCartCount } = useCartStore()
+  const { toggleItem: toggleFavoriteItem, isFavorite: checkIsFavorite } = useHydratedFavoriteStore()
+  const { addItem: addToCart, removeItem: removeFromCart, items: cartItems } = useCartStore()
+  
+  const isFavorite = checkIsFavorite(id.toString())
+  const isInCart = cartItems.some(item => item.id === id.toString())
 
-  useEffect(() => {
-    setIsFavorite(initialIsFavorite || false)
-  }, [initialIsFavorite])
+  // Los estados ahora se manejan directamente desde los stores
 
-  useEffect(() => {
-    setIsCart(initialIsCart || false)
-  }, [initialIsCart])
-
-  const handleFavoriteClick = async () => {
-    try {
-      const newFavoriteStatus = await toggleFavorite(id)
-      setIsFavorite(newFavoriteStatus)
-      updateFavoritesCount(newFavoriteStatus)
-
-      if (!newFavoriteStatus && onFavoriteRemoved) {
-        onFavoriteRemoved()
-      }
-
-      toast.success(
-        newFavoriteStatus ? 'Producto añadido a favoritos' : 'Producto eliminado de favoritos',
-      )
-    } catch (error: unknown) {
-      const err = error as AuthError;
-      if (err.message === 'Usuario no autenticado') {
-        toast.error('Debes iniciar sesión para guardar favoritos')
-        router.push('/login')
-      } else {
-        toast.error('Error al modificar favoritos')
-      }
+  const handleFavoriteClick = () => {
+    const imageUrl = gallery && gallery[0] && gallery[0].image ? getImageUrl(gallery[0].image) : undefined
+    const favoriteItem = {
+      id: id.toString(),
+      name: title,
+      price: price,
+      image: imageUrl
     }
+    
+    const wasInFavorites = isFavorite
+    toggleFavoriteItem(favoriteItem)
+    
+    if (wasInFavorites && onFavoriteRemoved) {
+      onFavoriteRemoved()
+    }
+    
+    toast.success(
+      !wasInFavorites ? 'Producto añadido a favoritos' : 'Producto eliminado de favoritos'
+    )
   }
 
-  const handleCartClick = async () => {
-    try {
-      const newCartStatus = await toggleCart(id)
-      setIsCart(newCartStatus)
-      updateCartCount(newCartStatus)
-
-      if (!newCartStatus && onCartRemoved) {
+  const handleCartClick = () => {
+    const imageUrl = gallery && gallery[0] && gallery[0].image ? getImageUrl(gallery[0].image) : undefined
+    const cartItem = {
+      id: id.toString(),
+      name: title,
+      price: price,
+      image: imageUrl
+    }
+    
+    if (isInCart) {
+      removeFromCart(id.toString())
+      if (onCartRemoved) {
         onCartRemoved()
       }
-
-      toast.success(
-        newCartStatus ? 'Producto añadido al carrito' : 'Producto eliminado del carrito',
-      )
-    } catch (error: unknown) {
-      const err = error as AuthError;
-      if (err.message === 'Usuario no autenticado') {
-        toast.error('Debes iniciar sesión para guardar un carrito')
-        router.push('/login')
-      } else {
-        toast.error('Error al modificar carrito')
-      }
+      toast.success('Producto eliminado del carrito')
+    } else {
+      addToCart(cartItem)
+      toast.success('Producto añadido al carrito')
     }
   }
 
@@ -131,9 +111,9 @@ export const ProductCard = (props: ProductCardProps) => {
               />
               <IconButton
                 onClick={handleCartClick}
-                icon={<ShoppingCart size={20} fill={isCart ? 'currentColor' : 'none'} />}
-                className={`bg-white text-gray-800 hover:bg-primary hover:text-white transition-colors duration-200 transform active:scale-95 ${isCart ? 'text-primary' : ''}`}
-                aria-label={isCart ? "Eliminar del carrito" : "Añadir al carrito"}
+                icon={<ShoppingCart size={20} fill={isInCart ? 'currentColor' : 'none'} />}
+                className={`bg-white text-gray-800 hover:bg-primary hover:text-white transition-colors duration-200 transform active:scale-95 ${isInCart ? 'text-primary' : ''}`}
+                aria-label={isInCart ? "Eliminar del carrito" : "Añadir al carrito"}
               />
               <IconButton
                 onClick={handleFavoriteClick}

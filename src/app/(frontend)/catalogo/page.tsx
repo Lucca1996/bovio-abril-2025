@@ -3,7 +3,10 @@ import { getProducts } from '../components/getProducts';
 import CatalogClient from './components/catalog-client';
 import { getCategories } from '../components/getCategories';
 import { getStyles } from './components/getStyles';
-import type { Product, Category, Style } from '@/payload-types';
+import { getUso } from './components/getUso';
+import { getArea } from './components/getArea';
+import { getTipo } from './components/getTipo';
+import type { Product, Category, Style, Uso, Area, Tipo } from '@/payload-types';
 import { getUser } from '../(authenticated)/actions/getUser';
 import Link from 'next/link';
 
@@ -20,6 +23,9 @@ export default async function CatalogPage() {
 
   const categories: Category[] = await getCategories();
   const styles: Style[] = await getStyles();
+  const usos: Uso[] = await getUso();
+  const areas: Area[] = await getArea();
+  const tipos: Tipo[] = await getTipo();
   const user = await getUser();
   
   // Obtener los IDs de favoritos
@@ -74,8 +80,11 @@ export default async function CatalogPage() {
         }>
           <CatalogClient 
             initialProducts={products} 
+            initialUsos={usos}
             initialCategories={categories} 
             initialStyles={styles}
+            initialAreas={areas}
+            initialTipos={tipos}
             initialFavorites={favoriteIds}
             initialCart={cartIds}
           />

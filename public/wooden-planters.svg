@@ -1,0 +1,49 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Maceta izquierda -->
+  <g>
+    <!-- Base -->
+    <rect x="20" y="120" width="60" height="60" rx="4" fill="#CD853F" stroke="#8B4513" stroke-width="2"/>
+    <!-- Patas -->
+    <rect x="15" y="175" width="8" height="15" fill="#8B4513"/>
+    <rect x="77" y="175" width="8" height="15" fill="#8B4513"/>
+    <rect x="15" y="105" width="8" height="15" fill="#8B4513"/>
+    <rect x="77" y="105" width="8" height="15" fill="#8B4513"/>
+    <!-- Vetas -->
+    <path d="M25 130 L75 130" stroke="#8B4513" stroke-width="1" opacity="0.6"/>
+    <path d="M25 145 L75 145" stroke="#8B4513" stroke-width="1" opacity="0.6"/>
+    <path d="M25 160 L75 160" stroke="#8B4513" stroke-width="1" opacity="0.6"/>
+    <!-- Planta -->
+    <ellipse cx="50" cy="115" rx="15" ry="8" fill="#2F4F2F"/>
+    <path d="M35 115 Q40 100 45 115" fill="#228B22"/>
+    <path d="M45 115 Q50 95 55 115" fill="#32CD32"/>
+    <path d="M55 115 Q60 100 65 115" fill="#228B22"/>
+  </g>
+  
+  <!-- Maceta derecha -->
+  <g>
+    <!-- Base -->
+    <rect x="120" y="120" width="60" height="60" rx="4" fill="#D2691E" stroke="#8B4513" stroke-width="2"/>
+    <!-- Patas -->
+    <rect x="115" y="175" width="8" height="15" fill="#8B4513"/>
+    <rect x="177" y="175" width="8" height="15" fill="#8B4513"/>
+    <rect x="115" y="105" width="8" height="15" fill="#8B4513"/>
+    <rect x="177" y="105" width="8" height="15" fill="#8B4513"/>
+    <!-- Vetas -->
+    <path d="M125 130 L175 130" stroke="#8B4513" stroke-width="1" opacity="0.6"/>
+    <path d="M125 145 L175 145" stroke="#8B4513" stroke-width="1" opacity="0.6"/>
+    <path d="M125 160 L175 160" stroke="#8B4513" stroke-width="1" opacity="0.6"/>
+    <!-- Planta -->
+    <ellipse cx="150" cy="115" rx="18" ry="10" fill="#2F4F2F"/>
+    <path d="M130 115 Q135 90 140 115" fill="#228B22"/>
+    <path d="M140 115 Q145 85 150 115" fill="#32CD32"/>
+    <path d="M150 115 Q155 90 160 115" fill="#228B22"/>
+    <path d="M160 115 Q165 95 170 115" fill="#32CD32"/>
+  </g>
+  
+  <!-- Sombras -->
+  <ellipse cx="50" cy="195" rx="35" ry="4" fill="#000000" opacity="0.1"/>
+  <ellipse cx="150" cy="195" rx="35" ry="4" fill="#000000" opacity="0.1"/>
+  
+  <!-- Suelo -->
+  <rect x="0" y="190" width="200" height="10" fill="#F5F5DC" opacity="0.3"/>
+</svg>
