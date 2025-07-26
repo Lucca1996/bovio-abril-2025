@@ -8,8 +8,8 @@ import { ClientLayout } from './components/client-layout' // Import ClientLayout
 import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata = {
-    title: 'SAS - Sistema de Administración de Servicios',
-    description: 'Sistema de Administración de Servicios',
+    title: 'SAS - Carpinteria en Tucuman',
+    description: 'Carpinteria en Tucuman',
     icons: {
       icon: [
         { url: '/favicon.ico', sizes: '32x32' },

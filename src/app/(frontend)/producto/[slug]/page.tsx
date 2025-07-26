@@ -10,14 +10,14 @@ import { TechnicalDetails } from './components/technical-details';
 import { FinishCustomizer } from './components/finish-customizer';
 import { Button } from '@/components/ui/button';
 import { Heart, ShoppingCart, ChevronRight, MessageSquare } from 'lucide-react';
-import { toggleFavorite } from '../../actions/favoriteActions';
-import { toggleCart } from '../../actions/cartActions';
+import { useHydratedFavoriteStore } from '@/store/useFavoriteStore';
+import { formatPrice } from '../../lib/formatPrice';
+import { getImageUrl } from '../../lib/getImageUrl';
 import { toast } from 'sonner';
 import { getUser } from '../../(authenticated)/actions/getUser';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useCartStore } from '@/store/useCartStore'; // Importar el store global
-import { useHydratedFavoriteStore } from '@/store/useFavoriteStore'; // Importar el store de favoritos si existe
 
 export const dynamic = 'force-dynamic';
 
@@ -26,15 +26,19 @@ export default function ProductPage() {
     const { slug } = useParams();
     const [product, setProduct] = useState<ProductType | null>(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [isFavorite, setIsFavorite] = useState(false);
-    const [isCart, setIsCart] = useState(false);
+    const [_isFavorite, setIsFavorite] = useState(false);
+    const [_isCart, setIsCart] = useState(false);
     const [scrollProgress, setScrollProgress] = useState(0);
         const [selectedFinishInfo, setSelectedFinishInfo] = useState<string>('');
     const mainRef = useRef<HTMLElement>(null);
     
     // Usar los stores globales
-    const { updateCartCount } = useCartStore();
-    const { updateFavoritesCount } = useHydratedFavoriteStore();
+    const { addItem: addToCart, removeItem: removeFromCart, items: cartItems } = useCartStore();
+    const { toggleItem: toggleFavoriteItem, isFavorite: checkIsFavorite } = useHydratedFavoriteStore();
+    
+    // Estados derivados de los stores
+    const isFavoriteFromStore = checkIsFavorite(product?.id.toString() || '');
+    const isInCartFromStore = cartItems.some(item => item.id === product?.id.toString());
 
     // Efecto combinado para cargar producto y datos de usuario
     useEffect(() => {
@@ -93,29 +97,36 @@ export default function ProductPage() {
     }, []);
 
     // Manejadores de eventos memoizados
-    const handleFavoriteClick = async () => {
+    const handleFavoriteClick = () => {
         if (!product) return;
-        try {
-            await toggleFavorite(product.id);
-            setIsFavorite(!isFavorite);
-            // Actualizar el contador global de favoritos
-            updateFavoritesCount();
-            toast.success(isFavorite ? 'Producto eliminado de favoritos' : 'Producto agregado a favoritos');
-        } catch (_error) {
-            toast.error('Error al actualizar favoritos');
-        }
+        const imageUrl = product.gallery && product.gallery[0] && product.gallery[0].image ? getImageUrl(product.gallery[0].image) : undefined;
+        const favoriteItem = {
+            id: product.id.toString(),
+            name: product.title,
+            price: product.price,
+            image: imageUrl
+        };
+        
+        toggleFavoriteItem(favoriteItem);
+        toast.success(isFavoriteFromStore ? 'Producto eliminado de favoritos' : 'Producto agregado a favoritos');
     };
 
-    const handleCartClick = async () => {
+    const handleCartClick = () => {
         if (!product) return;
-        try {
-            await toggleCart(product.id);
-            setIsCart(!isCart);
-            // Actualizar el contador global del carrito
-            updateCartCount();
-            toast.success(isCart ? 'Producto eliminado del carrito' : 'Producto agregado al carrito');
-        } catch (_error) {
-            toast.error('Error al actualizar el carrito');
+        const imageUrl = product.gallery && product.gallery[0] && product.gallery[0].image ? getImageUrl(product.gallery[0].image) : undefined;
+        const cartItem = {
+            id: product.id.toString(),
+            name: product.title,
+            price: product.price,
+            image: imageUrl
+        };
+        
+        if (isInCartFromStore) {
+            removeFromCart(product.id.toString());
+            toast.success('Producto eliminado del carrito');
+        } else {
+            addToCart(cartItem);
+            toast.success('Producto agregado al carrito');
         }
     };
 
@@ -212,6 +223,13 @@ export default function ProductPage() {
                                 {product.description}
                             </p>
                             
+                            {/* Precio del producto */}
+                            <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700">
+                                <span className="text-lg font-medium text-gray-700 dark:text-gray-300">Precio Estimado:</span>
+                                <p className="text-3xl font-bold text-green-700 dark:text-green-400">
+                                    {formatPrice(product.price)}
+                                </p>
+                            </div>
                             
                         </motion.div>
 
@@ -245,16 +263,16 @@ export default function ProductPage() {
                                     onClick={handleCartClick}
                                 >
                                     <ShoppingCart className="w-5 h-5 mr-2" />
-                                    {isCart ? 'Eliminar del carrito' : 'Agregar al carrito'}
+                                    {isInCartFromStore ? 'Eliminar del carrito' : 'Agregar al carrito'}
                                 </Button>
                                 <Button
                                     size="lg"
                                     variant="outline"
                                     onClick={handleFavoriteClick}
-                                    className={`py-6 transition-all duration-300 hover:scale-105 ${isFavorite ? "text-red-500 border-red-200 hover:border-red-300 hover:bg-red-50" : ""}`}
-                                    aria-label={isFavorite ? "Eliminar de favoritos" : "Agregar a favoritos"}
+                                    className={`py-6 transition-all duration-300 hover:scale-105 ${isFavoriteFromStore ? "text-red-500 border-red-200 hover:border-red-300 hover:bg-red-50" : ""}`}
+                                    aria-label={isFavoriteFromStore ? "Eliminar de favoritos" : "Agregar a favoritos"}
                                 >
-                                    <Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />
+                                    <Heart className={`w-5 h-5 ${isFavoriteFromStore ? "fill-current" : ""}`} />
                                 </Button>
                             </div>
                         </div>

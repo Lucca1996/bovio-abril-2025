@@ -9,26 +9,27 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Datos para el carrusel
 const carouselData = [
-  {
+   {
     id: 1,
-    image: "https://crehana-blog.imgix.net/media/filer_public/12/36/12361c27-ecd0-4e5b-bb82-4623aaf9e94a/taladro_de_carpinteria.jpg?auto=format&q=50",
-    slogan: "Artesanía de precisión",
-    description: "Cada pieza es una obra maestra de detalle y calidad",
-    promo: "20% de descuento en muebles a medida"
+    image: "https://i.pinimg.com/736x/9a/61/20/9a61202463cbd304691cf285debb9754.jpg",
+    slogan: "Diseños que inspiran",
+    description: "Creamos espacios que reflejan tu personalidad",
+    promo: "La solucion viaja hacia vos."
   },
   {
     id: 2,
-    image: "https://serveiestacio.com/blog/wp-content/uploads/2021/05/herramientas-de-carpinteria-servei-estacio.jpg",
-    slogan: "Diseños que inspiran",
-    description: "Creamos espacios que reflejan tu personalidad",
-    promo: "Envío gratuito en compras superiores a $300.000"
+    image: "https://i.pinimg.com/736x/74/13/18/7413187ad252cd038a1c2c9ba8a88da6.jpg",
+    slogan: "Compromiso en cada trabajo",
+    description: "Cada pieza es una obra de detalle y calidad",
+    promo: "Nuestro objetivo es satisfacer una necesidad."
   },
+ 
   {
     id: 3,
-    image: "https://homepro.com.mx/hubfs/Todo%20sobre%20servicios%20de%20carpinter%C3%ADa%20en%20la%20CDMX.jpg",
-    slogan: "Innovación sostenible",
-    description: "Comprometidos con el medio ambiente y la calidad",
-    promo: "2x1 en accesorios de madera esta semana"
+    image: "https://i.pinimg.com/736x/f2/31/db/f231db1e19ae1c3eba684255e9868ecd.jpg",
+    slogan: "Resultados visibles",
+    description: "Trabajamos con distintas entidades que muestran nuestros trabajos",
+    promo: "Cubrimos cada vez mas areas!"
   }
 ];
 

@@ -64,11 +64,11 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
   });
   const [isMobile, setIsMobile] = useState(false);
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
-    categories: true,
-    styles: true,
-    usos: true,
-    areas: true,
-    tipos: true
+    categories: false,
+    styles: false,
+    usos: false,
+    areas: false,
+    tipos: false
   });
 
   useEffect(() => {
@@ -83,6 +83,31 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
   }, []);
 
   const filterSections: FilterSection[] = [
+     {
+      id: 'usos',
+      title: 'Uso',
+      items: usos.map(uso => ({ id: uso.id, title: uso.title })),
+      selectedValue: selectedUso,
+      onChange: onUsoChange,
+      searchPlaceholder: 'Buscar usos...'
+    },
+    {
+      id: 'areas',
+      title: 'Área',
+      items: areas.map(area => ({ id: area.id, title: area.title })),
+      selectedValue: selectedArea,
+      onChange: onAreaChange,
+      searchPlaceholder: 'Buscar áreas...'
+    },
+     
+    {
+      id: 'tipos',
+      title: 'Tipo',
+      items: tipos.map(tipo => ({ id: tipo.id, title: tipo.title })),
+      selectedValue: selectedTipo,
+      onChange: onTipoChange,
+      searchPlaceholder: 'Buscar tipos...'
+    },
     {
       id: 'categories',
       title: 'Categorías',
@@ -99,30 +124,8 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
       onChange: onStyleChange,
       searchPlaceholder: 'Buscar estilos...'
     },
-    {
-      id: 'usos',
-      title: 'Uso',
-      items: usos.map(uso => ({ id: uso.id, title: uso.title })),
-      selectedValue: selectedUso,
-      onChange: onUsoChange,
-      searchPlaceholder: 'Buscar usos...'
-    },
-    {
-      id: 'areas',
-      title: 'Área',
-      items: areas.map(area => ({ id: area.id, title: area.title })),
-      selectedValue: selectedArea,
-      onChange: onAreaChange,
-      searchPlaceholder: 'Buscar áreas...'
-    },
-    {
-      id: 'tipos',
-      title: 'Tipo',
-      items: tipos.map(tipo => ({ id: tipo.id, title: tipo.title })),
-      selectedValue: selectedTipo,
-      onChange: onTipoChange,
-      searchPlaceholder: 'Buscar tipos...'
-    },
+   
+   
   ];
 
   const activeFiltersCount = [selectedCategory, selectedStyle, selectedUso, selectedArea, selectedTipo]
@@ -208,6 +211,17 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
             className="px-3 py-2 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"
           >
             <div className="flex flex-wrap gap-1.5">
+                 {selectedUso && (
+                <Badge variant="outline" className="bg-white dark:bg-gray-800 text-xs px-2 py-1">
+                  {usos.find(u => u.id.toString() === selectedUso)?.title}
+                  <button
+                    onClick={() => onUsoChange(null)}
+                    className="ml-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full p-0.5"
+                  >
+                    <X className="h-2.5 w-2.5" />
+                  </button>
+                </Badge>
+              )}
               {selectedCategory && (
                 <Badge variant="outline" className="bg-white dark:bg-gray-800 text-xs px-2 py-1">
                   {categories.find(c => c.id.toString() === selectedCategory)?.name}
@@ -230,17 +244,7 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
                   </button>
                 </Badge>
               )}
-              {selectedUso && (
-                <Badge variant="outline" className="bg-white dark:bg-gray-800 text-xs px-2 py-1">
-                  {usos.find(u => u.id.toString() === selectedUso)?.title}
-                  <button
-                    onClick={() => onUsoChange(null)}
-                    className="ml-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full p-0.5"
-                  >
-                    <X className="h-2.5 w-2.5" />
-                  </button>
-                </Badge>
-              )}
+           
               {selectedArea && (
                 <Badge variant="outline" className="bg-white dark:bg-gray-800 text-xs px-2 py-1">
                   {areas.find(a => a.id.toString() === selectedArea)?.title}
