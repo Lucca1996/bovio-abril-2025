@@ -1,7 +1,6 @@
 
 import { buttonVariants } from "@/components/ui/button"
 import Link from "next/link"
-import Image from "next/image"
 import { Metadata } from "next"
 
 // Metadatos para SEO
@@ -187,7 +186,7 @@ export default function Jobs() {
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md inline-block">
                   <h4 className="text-lg font-bold mb-2 text-primary">¿Listo para comenzar?</h4>
                   <p className="text-gray-700 dark:text-gray-300 mb-4">Contáctenos con esta información y recibirá una propuesta detallada en 48 horas</p>
-                  <Link href="/contact" className={buttonVariants({ variant: "default", size: "lg" })}>
+                  <Link href="/contacto" className={buttonVariants({ variant: "default", size: "lg" })}>
                     Solicitar Presupuesto
                   </Link>
                 </div>
@@ -195,72 +194,7 @@ export default function Jobs() {
             </div>
           </div>
 
-          {/* Galería de Proyectos Destacados */}
-          <div className="mb-20">
-            <h2 className="text-3xl font-bold text-center mb-12 dark:text-white">Proyectos Destacados</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="group relative overflow-hidden rounded-xl">
-                <Image 
-                  src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                  alt="Recepción corporativa moderna" 
-                  width={400} 
-                  height={300}
-                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                  <h3 className="text-xl font-bold text-white">Recepción Corporativa</h3>
-                  <p className="text-white/80">Diseño moderno con acabados premium</p>
-                </div>
-              </div>
-              
-              <div className="group relative overflow-hidden rounded-xl">
-                <Image 
-                  src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                  alt="Mobiliario comercial" 
-                  width={400} 
-                  height={300}
-                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                  <h3 className="text-xl font-bold text-white">Mobiliario Retail</h3>
-                  <p className="text-white/80">Soluciones de exhibición y almacenamiento</p>
-                </div>
-              </div>
-              
-              <div className="group relative overflow-hidden rounded-xl">
-                <Image 
-                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                  alt="Oficina ejecutiva" 
-                  width={400} 
-                  height={300}
-                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                  <h3 className="text-xl font-bold text-white">Oficina Ejecutiva</h3>
-                  <p className="text-white/80">Espacios de trabajo personalizados</p>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          {/* Call to Action Final */}
-          <div className="text-center">
-            <div className="bg-gradient-to-r from-primary to-primary-dark p-8 rounded-3xl text-white">
-              <h2 className="text-3xl font-bold mb-4">¿Tiene un proyecto en mente?</h2>
-              <p className="text-xl mb-6 opacity-90">Transformemos su espacio comercial con soluciones de carpintería a medida</p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/contact" className={buttonVariants({ variant: "secondary", size: "lg" })}>
-                  Contactar Ahora
-                </Link>
-                <Link href="/catalogo" className={buttonVariants({ variant: "outline", size: "lg" })}>
-                  Ver Catálogo
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </>

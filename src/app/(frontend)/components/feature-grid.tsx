@@ -97,10 +97,10 @@ const FlipCard = ({ category, index }: { category: Category, index: number }) =>
             transform: 'rotateY(180deg)'
           }}
         >
-          <h3 className="text-2xl font-bold mb-4">{category.name}</h3>
-          <p className="text-center mb-6">Descubre nuestra colección de {category.name.toLowerCase()} diseñados con los más altos estándares de calidad.</p>
+          <h3 className="text-2xl dark:text-black font-bold mb-4">{category.name}</h3>
+          <p className="text-center dark:text-black mb-6">Descubre nuestra colección de {category.name.toLowerCase()} diseñados con los más altos estándares de calidad.</p>
           <button 
-            className="px-6 py-2 bg-white text-primary font-medium rounded-md hover:bg-gray-100 transition-colors duration-300"
+            className="px-6 py-2 bg-white text-black font-medium rounded-md hover:bg-gray-100 transition-colors duration-300"
             onClick={(e) => {
               e.stopPropagation(); // Evita que se active el onClick del contenedor padre
               window.location.href = `/catalogo?category=${category.id}`;

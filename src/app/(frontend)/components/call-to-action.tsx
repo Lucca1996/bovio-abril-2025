@@ -71,7 +71,7 @@ export const CallToAction = () => {
                 href="/medida" 
                 className={buttonVariants({
                   size: "lg",
-                  className: "bg-primary hover:bg-primary/90 text-white font-medium px-8 py-3 rounded-md shadow-[0_4px_14px_0_rgba(0,118,255,0.39)]"
+                  className: "bg-primary dark:text-black hover:bg-primary/90 text-white font-medium px-8 py-3 rounded-md shadow-[0_4px_14px_0_rgba(0,118,255,0.39)]"
                 })}
               >
                 Solicitar Presupuesto

@@ -1,14 +1,9 @@
 "use client"
-import { useState } from "react"
 import { buttonVariants } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import Link from "next/link"
 import Image from 'next/image'
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { toast } from "sonner"
 
 type CarouselItemData = {
     id: number;
@@ -19,54 +14,28 @@ type CarouselItemData = {
 const dataCarouselTop: CarouselItemData[] = [
     {
         id: 1,
-        title: "Envio 24/48 h",
+        title: "Envios a domicilio",
         link: "https://media.admagazine.com/photos/618a5fe3517556595755629d/master/w_1600%2Cc_limit/88711.jpg",
     },
     {
         id: 2,
-        title: "Descuento en compras",
+        title: "Soluciones personalizadas",
         link: "https://media.revistaad.es/photos/65c3640a8218e9afce81024e/16:9/w_1280,c_limit/02_Destudio_CasaChaflan_ParedPalilleria.jpg",
     },
     {
         id: 3,
-        title: "Algunos tipos laburando",
+        title: "Experiencia comprobable",
         link: "https://png.pngtree.com/background/20230613/original/pngtree-large-bathroom-with-wooden-cabinets-and-two-sinks-picture-image_3426981.jpg",
     },
     {
         id: 4,
-        title: "Comprar novedades",
+        title: "Novedades",
         link: "https://media.revistaad.es/photos/63ad310fd51201b6f36b0fb1/16:9/w_4496,h_2529,c_limit/Marta%20Labrador-Proyecto-El%20refugio%20de%20una%20artista-dormitorio%20principal-1-FOTO%20%C2%A9Alejandro%20Cayetano.jpg",
     },
 ];
 
 export default function Page() {
-    const [formData, setFormData] = useState({
-        nombre: "",
-        email: "",
-        telefono: "",
-        mensaje: ""
-    });
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Aquí iría la lógica para enviar el formulario
-        console.log("Formulario enviado:", formData);
-        toast.success("Solicitud enviada correctamente. Nos pondremos en contacto contigo pronto.");
-        setFormData({
-            nombre: "",
-            email: "",
-            telefono: "",
-            mensaje: ""
-        });
-    };
+   
 
     return (
         <>
@@ -178,76 +147,10 @@ export default function Page() {
                             </p>
                         </div>
                         
-                        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6 md:p-8 max-w-3xl mx-auto">
-                            <form onSubmit={handleSubmit} className="space-y-6">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="nombre">Nombre completo</Label>
-                                        <Input 
-                                            id="nombre" 
-                                            name="nombre" 
-                                            placeholder="Tu nombre" 
-                                            value={formData.nombre}
-                                            onChange={handleChange}
-                                            required
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="email">Correo electrónico</Label>
-                                        <Input 
-                                            id="email" 
-                                            name="email" 
-                                            type="email" 
-                                            placeholder="tu@email.com" 
-                                            value={formData.email}
-                                            onChange={handleChange}
-                                            required
-                                        />
-                                    </div>
-                                </div>
-                                
-                                <div className="space-y-2">
-                                    <Label htmlFor="telefono">Teléfono (opcional)</Label>
-                                    <Input 
-                                        id="telefono" 
-                                        name="telefono" 
-                                        placeholder="Tu número de teléfono" 
-                                        value={formData.telefono}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                
-                                <div className="space-y-2">
-                                    <Label htmlFor="mensaje">Cuéntanos sobre tu proyecto</Label>
-                                    <Textarea 
-                                        id="mensaje" 
-                                        name="mensaje" 
-                                        placeholder="Describe tu idea o necesidad..." 
-                                        rows={5}
-                                        value={formData.mensaje}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                </div>
-                                
-                                <div className="flex justify-center">
-                                    <button 
-                                        type="submit" 
-                                        className={buttonVariants({
-                                            size: "lg",
-                                            className: "bg-primary hover:bg-primary/90 text-white font-medium px-8"
-                                        })}
-                                    >
-                                        Enviar solicitud
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                     
                         
                         <div className="text-center mt-12">
-                            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-                                También puedes contactarnos directamente:
-                            </p>
+                           
                             <div className="flex flex-col sm:flex-row justify-center gap-4">
                                 <Link 
                                     href="/contacto" 
@@ -259,7 +162,7 @@ export default function Page() {
                                     Ir a contacto
                                 </Link>
                                 <Link 
-                                    href="tel:+123456789" 
+                                    href="tel: 3816664927" 
                                     className={buttonVariants({
                                         variant: "ghost",
                                         className: "text-gray-700 dark:text-gray-300"

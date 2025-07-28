@@ -286,13 +286,13 @@ export default function ProductPage() {
                             <div className="p-5 border rounded-xl bg-gray-50 dark:bg-gray-800/50 hover:shadow-md transition-all duration-300 hover:scale-105">
                                 <h3 className="font-semibold mb-2">Garantía</h3>
                                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                                   
+                                   Todos nuestros productos incluyen garantia minima de 1 año
                                 </p>
                             </div>
                             <div className="p-5 border rounded-xl bg-gray-50 dark:bg-gray-800/50 hover:shadow-md transition-all duration-300 hover:scale-105">
                                 <h3 className="font-semibold mb-2">Envío seguro</h3>
                                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                                    Tracking 3D incluido
+                                    Seguimiento por ubicacion en tiempo real una vez que sale de nuestra fabrica
                                 </p>
                             </div>
                         </motion.div>

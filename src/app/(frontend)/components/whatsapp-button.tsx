@@ -15,7 +15,7 @@ export const WhatsAppButton = ({
   className = ""
 }: WhatsAppButtonProps) => {
   // Número de WhatsApp con formato internacional para Argentina
-  const phoneNumber = "5493816237710"
+  const phoneNumber = "3816664927"
   const whatsappUrl = `https://wa.me/${phoneNumber}`
 
   if (floating) {
@@ -30,7 +30,7 @@ export const WhatsAppButton = ({
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className={`flex items-center justify-center w-16 h-16 bg-green-500 rounded-full shadow-lg hover:bg-green-600 transition-colors duration-300 ${className}`}
+          className={`flex items-center justify-center w-16 h-16  shadow-lg duration-300 ${className}`}
           aria-label="Contactar por WhatsApp"
         >
           <FaWhatsapp className="text-white text-3xl" />
@@ -44,7 +44,7 @@ export const WhatsAppButton = ({
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-full shadow-md hover:bg-green-600 transition-colors duration-300 ${className}`}
+      className={`inline-flex ${className}`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >

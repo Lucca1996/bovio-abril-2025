@@ -20,7 +20,7 @@ interface WhatsAppChatProps {
 }
 
 export const WhatsAppChat = ({
-  phoneNumber = "5493816237710",
+  phoneNumber = "3816664927",
   buttonText = "Chatea con nosotros",
   className = "",
   floating = false
@@ -53,9 +53,9 @@ export const WhatsAppChat = ({
         >
           <Button 
             onClick={() => setIsOpen(true)}
-            className="w-16 h-16 rounded-full  bg-slate-900 hover:bg-green-600 flex items-center justify-center shadow-lg"
+            className="w-16 h-16 rounded-full  bg-slate-900 dark:bg-white dark:hover:bg-green-600 hover:bg-green-600 flex items-center justify-center shadow-lg"
           >
-            <FaWhatsapp className="text-white text-3xl" />
+            <FaWhatsapp className="text-white dark:text-black text-3xl" />
           </Button>
         </motion.div>
       )

@@ -108,7 +108,7 @@ export const HeroSection = () => {
               href="/catalogo" 
               className={buttonVariants({
                 size: "default",
-                className: "bg-primary hover:bg-primary/90 text-white font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-[0_4px_14px_0_rgba(0,118,255,0.39)]"
+                className: "bg-primary hover:bg-primary/90 text-black font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-[0_4px_14px_0_rgba(0,118,255,0.39)]"
               })}
             >
               Ver Catálogo
@@ -214,7 +214,7 @@ export const HeroSection = () => {
                     transition={{ delay: 0.3, duration: 0.3 }}
                     className="bg-primary/80 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg inline-block"
                   >
-                    <span className="font-medium text-sm sm:text-base">
+                    <span className="font-medium text-sm dark:text-black sm:text-base">
                       {carouselData[currentSlide].promo}
                     </span>
                   </motion.div>

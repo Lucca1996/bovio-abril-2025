@@ -296,15 +296,16 @@ export default function OurClients() {
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
             Únete a nuestra lista de clientes satisfechos y descubre cómo podemos ayudarte a alcanzar tus objetivos de negocio.
           </p>
-          <button 
+          <Link 
             className="inline-flex items-center px-8 py-4 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-slate-600 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 transition-transform duration-200 transform hover:scale-105 active:scale-95"
             aria-label="Contactar para más información"
+            href="/contacto"
           >
             Contáctanos hoy
             <svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
             </svg>
-          </button>
+          </Link>
         </div>
       </section>
 
