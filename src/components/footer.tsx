@@ -68,10 +68,10 @@ export const Footer = () => {
                         </h3>
                         <ul className="mt-4 space-y-2">
                             <li className="text-sm text-gray-600 dark:text-gray-400">
-                                Email: info@sas.com
+                                Email: sas.bovio@gmail.com
                             </li>
                             <li className="text-sm text-gray-600 dark:text-gray-400">
-                                Teléfono: +123 456 789
+                                Teléfono: 381-6664927
                             </li>
                         </ul>
                     </div>
@@ -83,7 +83,7 @@ export const Footer = () => {
                         </h3>
                         <div className="mt-4 flex space-x-4">
                             <a
-                                href="#"
+                                href="https://www.facebook.com/profile.php?id=61578173561309"
                                 className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                             >
                                 <span className="sr-only">Facebook</span>
@@ -96,7 +96,7 @@ export const Footer = () => {
                                 </svg>
                             </a>
                             <a
-                                href="#"
+                                href="https://www.instagram.com/bovio.sas/"
                                 className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                             >
                                 <span className="sr-only">Instagram</span>

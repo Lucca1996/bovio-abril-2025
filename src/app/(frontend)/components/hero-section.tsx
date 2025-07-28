@@ -100,7 +100,7 @@ export const HeroSection = () => {
             Transformamos <span className="text-primary">madera</span> en experiencias únicas
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0">
-            Diseño y fabricación de mobiliario personalizado con los más altos estándares de calidad y sostenibilidad.
+            Diseño y fabricación de mobiliario personalizado. Elegi el modelo que mas te guste o comparti tu idea con nosotros.
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 md:gap-4">

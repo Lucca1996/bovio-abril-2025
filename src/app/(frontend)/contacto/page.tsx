@@ -56,7 +56,7 @@ export default function Page() {
                                 {/* Redes sociales */}
                                 <div className="flex flex-wrap gap-4 mb-8">
                                     <a 
-                                        href="https://www.facebook.com/ipvtucuman" 
+                                        href="https://www.facebook.com/profile.php?id=61578173561309" 
                                         className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800 transition-colors duration-300"
                                         aria-label="Visita nuestro Facebook"
                                     >
@@ -66,7 +66,7 @@ export default function Page() {
                                         <span>Facebook</span>
                                     </a>
                                     <a 
-                                        href="https://www.instagram.com/ipvtucuman/" 
+                                        href="https://www.instagram.com/bovio.sas/" 
                                         className="flex items-center gap-2 px-4 py-2 rounded-full bg-pink-100 text-pink-700 hover:bg-pink-200 dark:bg-pink-900 dark:text-pink-200 dark:hover:bg-pink-800 transition-colors duration-300"
                                         aria-label="Visita nuestro Instagram"
                                     >
@@ -76,7 +76,7 @@ export default function Page() {
                                         <span>Instagram</span>
                                     </a>
                                     <a 
-                                        href="https://twitter.com/ipvdutuc?lang=es" 
+                                        href="https://www.instagram.com/bovio.sas/" 
                                         className="flex items-center gap-2 px-4 py-2 rounded-full bg-sky-100 text-sky-700 hover:bg-sky-200 dark:bg-sky-900 dark:text-sky-200 dark:hover:bg-sky-800 transition-colors duration-300"
                                         aria-label="Visita nuestro Twitter"
                                     >
@@ -86,7 +86,7 @@ export default function Page() {
                                         <span>Twitter</span>
                                     </a>
                                     <a 
-                                        href="https://wa.me/123456789" 
+                                        href="https://wa.me/3816664927" 
                                         className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900 dark:text-green-200 dark:hover:bg-green-800 transition-colors duration-300"
                                         aria-label="Contáctanos por WhatsApp"
                                     >
@@ -114,7 +114,7 @@ export default function Page() {
                                         <div>
                                             <h4 className="text-lg font-medium text-gray-900 dark:text-white">Ubicación</h4>
                                             <address className="not-italic text-gray-700 dark:text-gray-300 mt-1">
-                                                Avenida Siempre Viva 742<br />
+                                                Diagonal sur salvador allende 2996<br />
                                                 San Miguel de Tucumán, Argentina
                                             </address>
                                         </div>
@@ -131,12 +131,12 @@ export default function Page() {
                                             <h4 className="text-lg font-medium text-gray-900 dark:text-white">Contacto</h4>
                                             <p className="text-gray-700 dark:text-gray-300 mt-1">
                                                 <a href="tel:+11234567890" className="hover:text-gray-900 dark:hover:text-white transition-colors">
-                                                    Teléfono: +1 (123) 456-7890
+                                                    Teléfono: 381-6664927
                                                 </a>
                                             </p>
                                             <p className="text-gray-700 dark:text-gray-300">
                                                 <a href="mailto:boviosas@gmail.com" className="hover:text-gray-900 dark:hover:text-white transition-colors">
-                                                    Email: boviosas@gmail.com
+                                                    Email: sas.bovio@gmail.com
                                                 </a>
                                             </p>
                                         </div>
@@ -268,7 +268,7 @@ export default function Page() {
                         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 text-center">Nuestra ubicación</h3>
                         <div className="aspect-video w-full rounded-lg overflow-hidden shadow-lg">
                             <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.1022202999184!2d-65.2093906!3d-26.8367009!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225d3ad7f30f1d%3A0xf8606cd659b8e3e4!2sPlaza%20Independencia%2C%20San%20Miguel%20de%20Tucum%C3%A1n%2C%20Tucum%C3%A1n!5e0!3m2!1ses-419!2sar!4v1650000000000!5m2!1ses-419!2sar" 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d889.8165303736408!2d-65.23251597186777!3d-26.86328481143959!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225b9c70c1008d%3A0x7ec3b96cc2ec78e!2sDiag.%20Sur%202996%2C%20T4000%20San%20Miguel%20de%20Tucum%C3%A1n%2C%20Tucum%C3%A1n!5e0!3m2!1ses!2sar!4v1753734728842!5m2!1ses!2sar" 
                                 width="100%" 
                                 height="100%" 
                                 style={{ border: 0 }} 
