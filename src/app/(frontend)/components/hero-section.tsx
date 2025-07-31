@@ -96,10 +96,10 @@ export const HeroSection = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 leading-tight">
-            Transformamos <span className="text-primary">madera</span> en experiencias únicas
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 leading-tight drop-shadow-lg [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
+            Transformamos <span className="text-primary drop-shadow-md [text-shadow:_1px_1px_3px_rgb(0_0_0_/_60%)]">madera</span> en experiencias únicas
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0">
+          <p className="text-base sm:text-lg md:text-xl text-gray-100 mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0 drop-shadow-md [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)]">
             Diseño y fabricación de mobiliario personalizado. Elegi el modelo que mas te guste o comparti tu idea con nosotros.
           </p>
           
@@ -233,7 +233,7 @@ export const HeroSection = () => {
         transition={{ delay: 0.5, duration: 0.5 }}
         style={{ opacity: fadeIn }}
       >
-        <span className="text-xs sm:text-sm text-white mb-1 sm:mb-2">Descubre más</span>
+        <span className="text-xs sm:text-sm text-white mb-1 sm:mb-2 drop-shadow-md [text-shadow:_1px_1px_2px_rgb(0_0_0_/_70%)]">Descubre más</span>
         <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-white rounded-full flex justify-center p-1">
           <motion.div 
             className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full"
