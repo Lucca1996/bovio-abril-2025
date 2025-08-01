@@ -22,22 +22,22 @@ const clientsData: Client[] = [
     name: 'Centro de salud',
     category: 'Salud',
     logo: 'https://www.comunicaciontucuman.gob.ar/fotos/cache/notas/2023/10/04/730x473_231004123423_89680.jpg',
-    description: 'Mobiliario médico especializado con diseño ergonómico y funcional.',
+    description: 'Mobiliario médico especializado pensando en el flujo de atencion.',
     story: [
       { 
         title: 'Render 3D', 
-        description: 'Visualización detallada del mobiliario médico con especificaciones técnicas y acabados.',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkgUcTTVaep9vdmt_z1Kg4TYA5H6j86_8xDw&s'
+        description: 'Visualización detallada del mobiliario de recepcion con especificaciones técnicas y acabados.',
+        image: 'https://i.pinimg.com/736x/dc/a3/7e/dca37ec27208152e3f8e9e9285951709.jpg'
       },
       { 
         title: 'Construcción', 
         description: 'Fabricación con materiales de grado médico y estándares de calidad hospitalaria.',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkgUcTTVaep9vdmt_z1Kg4TYA5H6j86_8xDw&s'
+        image: 'https://i.pinimg.com/736x/71/9d/ac/719dacf8ce8082cbc192212ded4d92cb.jpg'
       },
       { 
         title: 'Resultado final', 
         description: 'Instalación completa de mobiliario funcional que mejora la eficiencia del centro de salud.',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkgUcTTVaep9vdmt_z1Kg4TYA5H6j86_8xDw&s'
+        image: 'https://i.pinimg.com/736x/20/6c/33/206c3395cfbbded469da2ece3726ffb5.jpg'
       }
     ]
   },
@@ -46,7 +46,7 @@ const clientsData: Client[] = [
     name: 'Hospital Padilla',
     category: 'Salud',
     logo: 'https://msptucuman.gov.ar/wordpress/wp-content/uploads/2015/07/portada-padilla-2-1024x512.jpg',
-    description: 'Soluciones de mobiliario hospitalario para áreas críticas y de atención.',
+    description: 'Soluciones de mobiliario hospitalario para áreas de atención.',
     story: [
       { 
         title: 'Render 3D', 
@@ -55,13 +55,13 @@ const clientsData: Client[] = [
       },
       { 
         title: 'Construcción', 
-        description: 'Fabricación con materiales antimicrobianos y diseño adaptado a protocolos hospitalarios.',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkgUcTTVaep9vdmt_z1Kg4TYA5H6j86_8xDw&s'
+        description: 'Fabricación con materiales y diseño adaptado a protocolos hospitalarios.',
+        image: 'https://i.pinimg.com/736x/de/f8/ce/def8ce85d7042861633140be4cb110f1.jpg'
       },
       { 
         title: 'Resultado final', 
-        description: 'Implementación exitosa que optimiza los espacios de trabajo del personal médico.',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkgUcTTVaep9vdmt_z1Kg4TYA5H6j86_8xDw&s'
+        description: 'Implementación exitosa que optimiza los espacios de trabajo del personal de salud.',
+        image: 'https://i.pinimg.com/736x/12/e0/ce/12e0ceab91da050b265a0e37934e967c.jpg'
       }
     ]
   },
