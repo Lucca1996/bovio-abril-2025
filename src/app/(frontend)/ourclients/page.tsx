@@ -45,7 +45,7 @@ const clientsData: Client[] = [
     id: 2,
     name: 'Hospital Padilla',
     category: 'Salud',
-    logo: 'https://msptucuman.gov.ar/wordpress/wp-content/uploads/2015/07/portada-padilla-2-1024x512.jpg',
+    logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIa6o4p4figAGjK0jFDzlT5iQfGWO-svE6TA&s',
     description: 'Soluciones de mobiliario hospitalario para áreas de atención.',
     story: [
       { 

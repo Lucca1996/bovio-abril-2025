@@ -5,26 +5,26 @@ import Image from 'next/image';
 
 // Array de imágenes optimizado para evitar duplicados
 const uniqueImages = [
-    "https://img.freepik.com/fotos-premium/taller-industrial-carpinteria-dos-hombres-trabajando-madera_116407-6348.jpg",
-    "https://static.vecteezy.com/system/resources/previews/003/658/025/non_2x/a-man-works-in-a-joiner-s-shop-working-with-a-tree-photo.jpg",
-    "https://static.vecteezy.com/system/resources/previews/002/387/457/non_2x/professional-carpenter-man-working-with-woodwork-industry-tool-construction-craftsman-person-workshop-with-timber-and-equipment-wood-work-free-photo.jpg",
-    "https://st2.depositphotos.com/4946015/9976/i/950/depositphotos_99769824-stock-photo-man-doing-woodwork-in-carpentry.jpg",
-    "https://st2.depositphotos.com/36771728/44864/i/450/depositphotos_448645688-stock-photo-carpenter-working-workshop-man-work.jpg",
-    "https://static.vecteezy.com/system/resources/previews/032/626/259/non_2x/strong-woman-worker-builder-team-work-joiner-in-wood-workshop-lady-carpenter-staff-helping-man-working-making-furniture-hard-work-fix-wooden-board-photo.jpg",
-    "https://media.istockphoto.com/id/530209574/es/foto/joven-hombre-carpintero-trabajando-con-madera-en-el-taller.jpg?s=1024x1024&w=is&k=20&c=7Y299hKLIgzOJnk-dovMkMJ6ZKjBOi86RWSgpBFOo-Y=",
-    "https://media.istockphoto.com/id/1155739091/es/foto/hombre-trabajando-en-una-carpinter%C3%ADa-haciendo-muebles.jpg?s=1024x1024&w=is&k=20&c=A4e-2KBhgeAOajUZLpPDl05jY0F7gV2_N_IRioGBBks=",
+    "https://i.pinimg.com/736x/06/7b/b7/067bb7e4a1684ea4ea9a564e9878b488.jpg",
+    "https://i.pinimg.com/736x/3f/59/1b/3f591b3363f3e775b30471a475e3029e.jpg",
+    "https://i.pinimg.com/736x/ec/27/a8/ec27a8577a1e2695ec19b6300ed7c20f.jpg",
+    "https://i.pinimg.com/736x/22/4a/2d/224a2d22c8364588c47a57980ac1e041.jpg",
+    "https://i.pinimg.com/736x/51/fd/be/51fdbed71025e42256b69ece961c7a5f.jpg",
+    "blob:https://ar.pinterest.com/2e1c0734-4bf2-41ee-9e58-b485358118ef",
+    "https://i.pinimg.com/736x/20/6c/33/206c3395cfbbded469da2ece3726ffb5.jpg",
+    "https://i.pinimg.com/736x/71/9d/ac/719dacf8ce8082cbc192212ded4d92cb.jpg",
 ];
 
 // Textos para las polaroids
 const polaroidTexts = [
-    "Taller de carpintería profesional",
-    "Artesano trabajando con madera",
-    "Técnicas avanzadas de carpintería",
-    "Detalle en cada pieza",
-    "Precisión y experiencia",
-    "Trabajo en equipo",
-    "Pasión por la madera",
-    "Creando muebles únicos",
+    "Profesionales en ejecucion",
+    "Deposito de pedidos",
+    "Obras en ejecucion",
+    "Instalaciones en la maternidad",
+    "Otra vista de nuestros trabajos en la maternidad",
+    "Escritorio pedido por el horpital de ranchillos",
+    "Resultados en el centro de salud",
+    "Ejecucion en el centro de salud",
 ];
 
 export default function Page() {
